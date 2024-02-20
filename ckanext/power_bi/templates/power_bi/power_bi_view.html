@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{%- block page -%}
+  <div data-module="power-bi-embed" data-module-config="{{ power_bi_report_config }}" data-module-language="{{ h.lang() }}">
+    <div id="power-bi-wrapper">
+      <div id="power-bi-container"></div>
+    </div>
+  </div>
+{%- endblock -%}
+
+{%- block styles -%}
+  {{- super() -}}
+  {% asset 'ckanext-power-bi/main-css' %}
+  {% asset 'ckanext-power-bi/main-js' %}
+{% endblock %}
+
+{% block custom_styles %}{% endblock %}

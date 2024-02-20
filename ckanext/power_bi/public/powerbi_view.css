@@ -1,0 +1,15 @@
+body{
+  background: none !important;
+}
+
+body div#power-bi-wrapper{
+  padding-top: 50%;
+}
+
+body div#power-bi-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
