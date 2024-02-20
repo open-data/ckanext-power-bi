@@ -1,6 +1,6 @@
 [![Tests](https://github.com/open-data/ckanext-power-bi/workflows/Tests/badge.svg?branch=main)](https://github.com/open-data/ckanext-power-bi/actions)
 
-# ckanext-gcnotify
+# ckanext-power-bi
 
 CKAN Extentsion for Power BI itegration
 
