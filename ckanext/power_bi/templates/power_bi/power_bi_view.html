@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {%- block page -%}
-  <div data-module="power-bi-embed" data-module-config="{{ power_bi_report_config }}" data-module-language="{{ h.lang() }}">
-    <div id="power-bi-wrapper">
-      <div id="power-bi-container"></div>
+  {% if power_bi_report_config %}
+    <div data-module="power-bi-embed" data-module-config="{{ power_bi_report_config }}" data-module-language="{{ h.lang() }}">
+      <div id="power-bi-wrapper">
+        <div id="power-bi-container"></div>
+      </div>
     </div>
-  </div>
+  {% else %}
+    <div class="power-bi-error-message">
+      <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        {{ _("Something went wrong. We could not retrieve the Power BI report.") }}</p>
+    </div>
+  {% endif %}
 {%- endblock -%}
 
 {%- block styles -%}

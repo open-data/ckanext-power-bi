@@ -13,3 +13,19 @@ body div#power-bi-container{
   right: 0;
   bottom: 0;
 }
+
+body div.power-bi-error-message{
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  background-color: #fff3cd;
+  padding: 12px 20px;
+  border-radius: .25em;
+  line-height: 1.5;
+  margin: 1.5rem;
+}
+
+body div.power-bi-error-message p{
+  margin: 0;
+}

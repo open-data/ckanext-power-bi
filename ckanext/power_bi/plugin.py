@@ -1,15 +1,17 @@
 import ckan.plugins as plugins
+from ckan.lib.plugins import DefaultTranslation
 
 from ckanext.power_bi import validators, helpers
 
 
-class PowerBiPlugin(plugins.SingletonPlugin):
+class PowerBiPlugin(plugins.SingletonPlugin, DefaultTranslation):
     """
     Integrate Power BI JS library and MSI Auth into a CKAN view.
     """
     plugins.implements(plugins.IConfigurer, inherit=True)
     plugins.implements(plugins.IValidators, inherit=True)
     plugins.implements(plugins.IResourceView, inherit=True)
+    plugins.implements(plugins.ITranslation, inherit=True)
 
     # IConfigurer
 
@@ -53,3 +55,8 @@ class PowerBiPlugin(plugins.SingletonPlugin):
                     'power_bi_report_id')],
             }
         }
+
+    # DefaultTranslation, ITranslation
+
+    def i18n_domain(self):
+        return 'ckanext-power-bi'

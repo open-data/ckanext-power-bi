@@ -1,0 +1,49 @@
+# French translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-02-21 17:26+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ckanext/power_bi/plugin.py:48 ckanext/power_bi/plugin.py:51
+msgid "Power BI"
+msgstr ""
+
+#: ckanext/power_bi/validators.py:12
+msgid "Power BI Report ID required."
+msgstr ""
+
+#: ckanext/power_bi/validators.py:14
+msgid "Power BI Report ID must be a string."
+msgstr ""
+
+#: ckanext/power_bi/validators.py:16
+msgid "Invalid value for a Power BI Report ID."
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:6
+msgid "Report ID"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:11
+msgid "The Power BI Report ID"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_view.html:13
+msgid "Something went wrong. We could not retrieve the Power BI report."
+msgstr ""
+
