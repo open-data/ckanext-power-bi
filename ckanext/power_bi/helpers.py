@@ -16,24 +16,26 @@ def get_report_config(data_dict):
         raise ObjectNotFound(_("Missing Power BI Report ID."))
 
     try:
-        # Setup your system/server with ManagedIdentityCredential (MSI)
-        # See: https://pypi.org/project/azure-identity/
-        # Section: Authenticate with a system-assigned managed identity
         credential = ManagedIdentityCredential()
     except ValueError:
         raise ObjectNotFound(_("An Azure Client ID has not been configured."))
 
+    err_msg = _("Unable to generate an access token to the Power BI Report.")
+
     try:
-        access_token = credential.get_token(
+        access_token_obj = credential.get_token(
             'https://analysis.windows.net/powerbi/api/.default')
     except CredentialUnavailableError:
-        raise NotAuthorized(_("Unable to generate an access "
-                              "token to the Power BI Report."))
+        raise NotAuthorized(err_msg)
+
+    access_token = getattr(access_token_obj, 'token', None)
+    if not access_token:
+        raise NotAuthorized(err_msg)
 
     return {
         "type": "report",
         "tokenType": 1,
-        "accessToken": access_token.get('token'),
+        "accessToken": access_token,
         "embedUrl":
             "https://app.powerbi.com/reportEmbed?reportId=%s&groupId=%s&language=%s" \
                 % (report_id, workspace_id, h.lang()),
