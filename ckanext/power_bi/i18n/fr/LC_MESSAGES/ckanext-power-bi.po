@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-22 16:28+0000\n"
+"POT-Creation-Date: 2024-02-22 18:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -27,11 +27,11 @@ msgstr ""
 msgid "Missing Power BI Report ID."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:21
+#: ckanext/power_bi/helpers.py:24
 msgid "An Azure Client ID has not been configured."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:27
+#: ckanext/power_bi/helpers.py:30
 msgid "Unable to generate an access token to the Power BI Report."
 msgstr ""
 
@@ -60,28 +60,20 @@ msgid "The Power BI Report ID"
 msgstr ""
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:17
-msgid "Allow Fullscreen Report"
-msgstr ""
-
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:22
-msgid "Allows the Power BI report to be opened in fullscreen mode."
-msgstr ""
-
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:28
 msgid "Display Filter Pane"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:33
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:22
 msgid ""
 "Shows the filter pane, allowing users to filter the data in the Power BI "
 "report."
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:39
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:28
 msgid "Display Navigation Pane"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:44
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:33
 msgid ""
 "Shows the navigation toolbar, allowing users to navigate through the "
 "pages of the Power BI report."
@@ -90,4 +82,10 @@ msgstr ""
 #: ckanext/power_bi/templates/power_bi/power_bi_view.html:22
 msgid "Something went wrong. We could not retrieve the Power BI report."
 msgstr ""
+
+#~ msgid "Allow Fullscreen Report"
+#~ msgstr ""
+
+#~ msgid "Allows the Power BI report to be opened in fullscreen mode."
+#~ msgstr ""
 

@@ -33,15 +33,13 @@ def get_report_config(data_dict):
     return {
         "type": "report",
         "tokenType": 1,
-        "accessToken": access_token,
+        "accessToken": access_token.get('token'),
         "embedUrl":
             "https://app.powerbi.com/reportEmbed?reportId=%s&groupId=%s&language=%s" \
                 % (report_id, workspace_id, h.lang()),
         "id": report_id,
         "permissions": 'Read',
         "settings": {
-            "allowfullscreen": data_dict.get('resource_view', {})\
-                .get('fullscreen', False),
             "localSettings": {
                 "language": h.lang(),
                 "formatLocale": "CA",

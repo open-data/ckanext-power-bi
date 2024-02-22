@@ -63,7 +63,6 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'preview_enabled': False,
             'schema': {
                 'report_id': [report_id_validator],
-                'fullscreen': [boolean_validator],
                 'filter_pane': [boolean_validator],
                 'nav_pane': [boolean_validator],
             },

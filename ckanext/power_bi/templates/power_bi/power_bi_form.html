@@ -12,17 +12,6 @@
 {% endcall %}
 
 {% call form.checkbox(
-  'fullscreen',
-  id='field-fullscreen',
-  label=_('Allow Fullscreen Report'),
-  value='False',
-  error=errors.fullscreen,
-  checked=data.fullscreen,
-) %}
-  {{ form.info(_('Allows the Power BI report to be opened in fullscreen mode.', classes=['info-help-tight'])) }}
-{% endcall %}
-
-{% call form.checkbox(
   'filter_pane',
   id='field-filter_pane',
   label=_('Display Filter Pane'),
