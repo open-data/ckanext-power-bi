@@ -80,7 +80,7 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points='''
         [ckan.plugins]
-        power_bi=ckanext.power_bi.plugin:PowerBiPlugin
+        power_bi_view=ckanext.power_bi.plugin:PowerBiViewPlugin
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan

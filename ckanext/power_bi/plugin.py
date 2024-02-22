@@ -4,7 +4,7 @@ from ckan.lib.plugins import DefaultTranslation
 from ckanext.power_bi import validators, helpers
 
 
-class PowerBiPlugin(plugins.SingletonPlugin, DefaultTranslation):
+class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     """
     Integrate Power BI JS library and MSI Auth into a CKAN view.
     """
@@ -17,8 +17,7 @@ class PowerBiPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def update_config(self, config):
         plugins.toolkit.add_template_directory(config, 'templates')
-        plugins.toolkit.add_public_directory(config, 'public')
-        plugins.toolkit.add_resource('public', 'ckanext-power-bi')
+        plugins.toolkit.add_resource('assets', 'ckanext-power-bi')
 
     # IValidators
 
@@ -33,8 +32,16 @@ class PowerBiPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return True
 
     def setup_template_variables(self, context, data_dict):
-        return {'power_bi_report_config':
-                    helpers.get_report_config(context, data_dict)}
+        report_config = None
+        error = None
+        try:
+            report_config = helpers.get_report_config(data_dict)
+        except (plugins.toolkit.ObjectNotFound,
+                plugins.toolkit.NotAuthorized) as e:
+            error = e
+            pass
+        return {'power_bi_report_config': report_config,
+                'power_bi_error': error,}
 
     def view_template(self, context, data_dict):
         return 'power_bi/power_bi_view.html'
@@ -43,6 +50,10 @@ class PowerBiPlugin(plugins.SingletonPlugin, DefaultTranslation):
         return 'power_bi/power_bi_form.html'
 
     def info(self):
+        report_id_validator = plugins.toolkit.get_validator(
+                                'power_bi_report_id')
+        boolean_validator = plugins.toolkit.get_validator(
+                                'boolean_validator')
         return {
             'name': 'power_bi_view',
             'title': plugins.toolkit._('Power BI'),
@@ -51,9 +62,11 @@ class PowerBiPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'default_title': plugins.toolkit._('Power BI'),
             'preview_enabled': False,
             'schema': {
-                'report_id': [plugins.toolkit.get_validator(
-                    'power_bi_report_id')],
-            }
+                'report_id': [report_id_validator],
+                'fullscreen': [boolean_validator],
+                'filter_pane': [boolean_validator],
+                'nav_pane': [boolean_validator],
+            },
         }
 
     # DefaultTranslation, ITranslation

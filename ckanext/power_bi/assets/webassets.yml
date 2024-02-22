@@ -1,10 +1,10 @@
 main-css:
-  output: ckanext-power-bi/%(version)s_powerbi.css
+  output: ckanext-power-bi/%(version)s_power_bi.css
   contents:
-    - powerbi_view.css
+    - power_bi_view.css
 
 main-js:
-  output: ckanext-power-bi/%(version)s_powerbi.js
+  output: ckanext-power-bi/%(version)s_power_bi.js
   contents:
     - vendor/powerbi.js  # dist release microsoft/release-2.22.2 (https://github.com/microsoft/PowerBI-JavaScript)
-    - powerbi_view.js
+    - power_bi_view.js

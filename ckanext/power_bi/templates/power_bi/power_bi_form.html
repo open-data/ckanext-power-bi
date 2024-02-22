@@ -6,7 +6,40 @@
   label=_('Report ID'),
   value=data.report_id,
   error=errors.report_id,
-  is_required=true) %}
-  {{ form.info(
-  _('The Power BI Report ID', classes=['info-help-tight'])) }}
+  is_required=true,
+  attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
+  {{ form.info(_('The Power BI Report ID', classes=['info-help-tight'])) }}
+{% endcall %}
+
+{% call form.checkbox(
+  'fullscreen',
+  id='field-fullscreen',
+  label=_('Allow Fullscreen Report'),
+  value='False',
+  error=errors.fullscreen,
+  checked=data.fullscreen,
+) %}
+  {{ form.info(_('Allows the Power BI report to be opened in fullscreen mode.', classes=['info-help-tight'])) }}
+{% endcall %}
+
+{% call form.checkbox(
+  'filter_pane',
+  id='field-filter_pane',
+  label=_('Display Filter Pane'),
+  value='False',
+  error=errors.filter_pane,
+  checked=data.filter_pane,
+) %}
+  {{ form.info(_('Shows the filter pane, allowing users to filter the data in the Power BI report.', classes=['info-help-tight'])) }}
+{% endcall %}
+
+{% call form.checkbox(
+  'nav_pane',
+  id='field-nav_pane',
+  label=_('Display Navigation Pane'),
+  value='False',
+  error=errors.nav_pane,
+  checked=data.nav_pane,
+) %}
+  {{ form.info(_('Shows the navigation toolbar, allowing users to navigate through the pages of the Power BI report.', classes=['info-help-tight'])) }}
 {% endcall %}

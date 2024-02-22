@@ -27,16 +27,16 @@ To install ckanext-power-bi:
 
 1. Activate your CKAN virtual environment, for example:
 
-     . /usr/lib/ckan/default/bin/activate
+     `. /usr/lib/ckan/default/bin/activate`
 
 2. Clone the source and install it on the virtualenv
 
-    git clone --branch master --single-branch https://github.com/open-data/ckanext-power-bi.git
-    cd ckanext-power-bi
-    pip install -e .
-    pip install -r requirements.txt
+    - `git clone --branch master --single-branch https://github.com/open-data/ckanext-power-bi.git`
+    - `cd ckanext-power-bi`
+    - `pip install -e .`
+    - `pip install -r requirements.txt` (`requirements-py2.txt` for Python 2)
 
-3. Add `power_bi` to the `ckan.plugins` setting in your CKAN
+3. Add `power_bi_view` to the `ckan.plugins` setting in your CKAN
    config file
 
 4. Restart CKAN
@@ -44,8 +44,17 @@ To install ckanext-power-bi:
 ## Config settings
 
 ```
-N/A
+ckanext.power_bi.workspace_id = <Power BI Workspace ID>
 ```
+
+## MSI Configuration
+
+This plugin uses `ManagedIdentityCredential (MSI)` on a system level to authenticate with Azure.
+
+See: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/qs-configure-portal-windows-vm
+
+See: https://pypi.org/project/azure-identity/
+Section: Authenticate with a system-assigned managed identity
 
 ## License
 
