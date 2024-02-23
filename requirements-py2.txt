@@ -1,1 +1,2 @@
 azure-identity==1.7.1
+requests==2.27.1

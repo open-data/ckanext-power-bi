@@ -45,6 +45,7 @@ To install ckanext-power-bi:
 
 ```
 ckanext.power_bi.workspace_id = <Power BI Workspace ID>
+ckanext.power_bi.org_name = <Power BI / Azure Organization ID>
 ```
 
 ## MSI Configuration

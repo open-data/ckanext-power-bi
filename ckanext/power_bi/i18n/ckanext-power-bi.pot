@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-power-bi 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-22 18:39+0000\n"
+"POT-Creation-Date: 2024-02-23 17:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,20 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: ckanext/power_bi/helpers.py:12
-msgid "A Power BI Workspace ID has not been configured."
-msgstr ""
-
 #: ckanext/power_bi/helpers.py:16
-msgid "Missing Power BI Report ID."
-msgstr ""
-
-#: ckanext/power_bi/helpers.py:21
 msgid "An Azure Client ID has not been configured."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:23
-msgid "Unable to generate an access token to the Power BI Report."
+#: ckanext/power_bi/helpers.py:18
+msgid "Unable to generate an access token to Azure."
+msgstr ""
+
+#: ckanext/power_bi/helpers.py:47
+msgid "A Power BI Organization has not been configured."
+msgstr ""
+
+#: ckanext/power_bi/helpers.py:75
+msgid "Unable to generate an embed token for the Power BI Report."
+msgstr ""
+
+#: ckanext/power_bi/helpers.py:87
+msgid "A Power BI Workspace ID has not been configured."
+msgstr ""
+
+#: ckanext/power_bi/helpers.py:91
+msgid "Missing Power BI Report ID."
 msgstr ""
 
 #: ckanext/power_bi/plugin.py:59 ckanext/power_bi/plugin.py:62
