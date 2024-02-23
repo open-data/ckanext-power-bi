@@ -26,7 +26,11 @@
 {%- block styles -%}
   {{- super() -}}
   {% asset 'ckanext-power-bi/main-css' %}
-  {% asset 'ckanext-power-bi/main-js' %}
-{% endblock %}
+{%- endblock -%}
 
 {% block custom_styles %}{% endblock %}
+
+{%- block scripts -%}
+  {{- super() -}}
+  {% asset 'ckanext-power-bi/main-js' %}
+{%- endblock -%}
