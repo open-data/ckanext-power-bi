@@ -41,7 +41,7 @@ def _get_embed_token(access_token, group_id, report_id):
     """
     embed_token = None
 
-    org_name = config.get('ckanext.power_bi.org_name')
+    org_name = config.get('ckanext.power_bi.org_name', 'myorg')
 
     if not org_name:
         raise ObjectNotFound(_("A Power BI Organization "

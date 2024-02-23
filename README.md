@@ -43,10 +43,18 @@ To install ckanext-power-bi:
 
 ## Config settings
 
-```
-ckanext.power_bi.workspace_id = <Power BI Workspace ID>
-ckanext.power_bi.org_name = <Power BI / Azure Organization ID>
-```
+- The Power BI Workspace ID (a.k.a. Group ID).
+  *Required:* `True`
+  *Default:* `None`
+  ```
+  ckanext.power_bi.workspace_id = <Power BI Workspace ID>
+  ```
+- The Power BI / Azure Organization (tennant) name. This option is more for future proofing the Power BI API endpoints within this code. Currently, the Power BI API does not support specific tennant/organization targeting.
+  *Required:* `False`
+  *Default:* `myorg`
+  ```
+  ckanext.power_bi.org_name = <Power BI / Azure Organization ID>
+  ```
 
 ## MSI Configuration
 
