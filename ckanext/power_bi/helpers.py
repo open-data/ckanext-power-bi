@@ -34,13 +34,13 @@ def get_report_config(data_dict):
 
     return {
         "type": "report",
-        "tokenType": 1,
+        "tokenType": 1,  # 1 == Embed
         "accessToken": access_token,
         "embedUrl":
             "https://app.powerbi.com/reportEmbed?reportId=%s&groupId=%s&language=%s" \
                 % (report_id, workspace_id, h.lang()),
         "id": report_id,
-        "permissions": 'Read',
+        "permissions": 0,  # 0 == Read
         "settings": {
             "localSettings": {
                 "language": h.lang(),
