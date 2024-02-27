@@ -116,9 +116,9 @@ def get_report_config(data_dict):
                 "formatLocale": "CA",
             },
             "filterPaneEnabled": data_dict.get('resource_view', {})\
-                .get('filter_pane', False),
+                .get('filter_pane', True),  # default show filter pane
             "navContentPaneEnabled": data_dict.get('resource_view', {})\
-                .get('nav_pane', False),
+                .get('nav_pane', True),  # default show navigation pane
         },
     }
 
