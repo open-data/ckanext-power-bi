@@ -32,19 +32,26 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def setup_template_variables(self, context, data_dict):
         report_config = None
         error = None
-        require_locales, default_locale, available_locales = \
+
+        i18n_enabled = plugins.toolkit.asbool(
+            plugins.toolkit.config.get(
+                'ckanext.power_bi.internal_i18n', False))
+        required_locales, default_locale, available_locales = \
             helpers.get_supported_locales()
+
         try:
             report_config = helpers.get_report_config(data_dict)
         except (plugins.toolkit.ObjectNotFound,
                 plugins.toolkit.NotAuthorized) as e:
             error = e
             pass
+
         return {'power_bi_report_config': report_config,
                 'power_bi_error': error,
-                'require_locales': require_locales,
+                'required_locales': required_locales,
                 'default_locale': default_locale,
-                'available_locales': available_locales,}
+                'available_locales': available_locales,
+                'i18n_enabled': i18n_enabled,}
 
     def view_template(self, context, data_dict):
         return 'power_bi/power_bi_view.html'
@@ -58,7 +65,10 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
         boolean_validator = plugins.toolkit.get_validator(
                                 'boolean_validator')
 
-        require_locales, default_locale, available_locales = \
+        i18n_enabled = plugins.toolkit.asbool(
+            plugins.toolkit.config.get(
+                'ckanext.power_bi.internal_i18n', False))
+        required_locales, default_locale, available_locales = \
             helpers.get_supported_locales()
 
         schema = {
@@ -67,8 +77,9 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'nav_pane': [boolean_validator],
         }
 
-        if require_locales is None:
-            # we only require the default locale, return schema here
+        if not i18n_enabled:
+            # using Power BI Multiple-Language Reports
+            # do not need the multiple language fields.
             return schema
 
         for locale in available_locales:

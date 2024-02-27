@@ -1,12 +1,10 @@
 from azure.identity import (
     ManagedIdentityCredential, CredentialUnavailableError)
 import requests
-from babel import Locale
 
 from ckan.lib.helpers import ckan_version
-from ckan.lib.i18n import get_identifier_from_locale_class
 from ckan.plugins.toolkit import (
-    h, _, config, asbool, ObjectNotFound, NotAuthorized)
+    h, _, config, ObjectNotFound, NotAuthorized)
 
 
 def _get_access_token():
@@ -124,11 +122,14 @@ def get_report_config(data_dict):
 
 
 def get_supported_locales():
-    require_locales = config.get('ckanext.power_bi.require_locales', None)
-    if require_locales is not None:
-        require_locales = asbool(require_locales)
+    required_locales = config.get(
+        'ckanext.power_bi.required_locales', '').split()
 
     default_locale = config.get('ckan.locale_default', 'en')
+
+    if default_locale not in required_locales:
+        # always require the default locale
+        required_locales.append(default_locale)
 
     available_locales = []
     core_locales = []
@@ -149,4 +150,4 @@ def get_supported_locales():
     else:
         available_locales = core_locales
 
-    return require_locales, default_locale, available_locales
+    return required_locales, default_locale, available_locales

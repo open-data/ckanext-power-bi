@@ -1,6 +1,6 @@
 {% import 'macros/form.html' as form %}
 
-{% if require_locales is none %}
+{% if not i18n_enabled %}
   {% call form.input(
     'report_id_' ~ default_locale,
       id='field-report_id_' ~ default_locale,
@@ -13,14 +13,13 @@
   {% endcall %}
 {% else %}
   {% for locale in available_locales %}
-    {% set field_is_required = true if locale == default_locale else true if require_locales else false %}
     {% call form.input(
       'report_id_' ~ locale,
       id='field-report_id_' ~ locale,
       label=_('Report ID') ~ ' (' ~ locale.upper() ~ ')',
       value=data['report_id_' ~ locale],
       error=errors['report_id_' ~ locale],
-      is_required=field_is_required,
+      is_required=(locale in required_locales),
       attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
       {{ form.info(_('The Power BI Report ID') ~ ' (' ~ locale.upper() ~ ')') }}
     {% endcall %}

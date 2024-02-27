@@ -70,14 +70,14 @@ For more information on how to set up your Reports for translation, see [this bl
 
 If you are not using Power BI Multiple-Language Reports, you are able to enable locale support in this plugin. This will add Report ID fields for each supported locale.
 
-- Require Locales. Defaults to `None`, meaning that there will be no locale support other than the above Power BI Multiple-Language Reports. `True` means that all offered locales are required fields. `False` means that only the default locale is required, and all other locales are optional.
+- Enable internal i18n support. Specifies to use the multiple language fields instead of the Power BI Multiple-Language Reports. Use this if you are not translating your Reports in Power BI.
 
   *Required:* `False`
 
-  *Default:* `None`
+  *Default:* `False`
 
   ```
-  ckanext.power_bi.require_locales = True|False
+  ckanext.power_bi.internal_i18n = True
   ```
 
 - Offered Locales. A string list of supported locales. The CKAN Core ones will be used by default.
@@ -88,6 +88,16 @@ If you are not using Power BI Multiple-Language Reports, you are able to enable 
 
   ```
   ckanext.power_bi.locales_offered = en es fr
+  ```
+
+- Required Locales. A string list of locales which will be required for the view Report ID fields. The CKAN default locale will ALWAYS be a required locale, even if it is omitted from this list.
+
+  *Required:* `False`
+
+  *Default:* `CKAN default locale`
+
+  ```
+  ckanext.power_bi.required_locales = en fr
   ```
 
 
