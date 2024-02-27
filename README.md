@@ -46,6 +46,7 @@ To install ckanext-power-bi:
 - The Power BI Workspace ID (a.k.a. Group ID).
 
   *Required:* `True`
+
   *Default:* `None`
 
   ```
@@ -54,6 +55,7 @@ To install ckanext-power-bi:
 - The Power BI / Azure Organization (tennant) name. This option is more for future proofing the Power BI API endpoints within this code. Currently, the Power BI API does not support specific tennant/organization targeting.
 
   *Required:* `False`
+
   *Default:* `myorg`
 
   ```
@@ -71,6 +73,7 @@ If you are not using Power BI Multiple-Language Reports, you are able to enable 
 - Require Locales. Defaults to `None`, meaning that there will be no locale support other than the above Power BI Multiple-Language Reports. `True` means that all offered locales are required fields. `False` means that only the default locale is required, and all other locales are optional.
 
   *Required:* `False`
+
   *Default:* `None`
 
   ```
@@ -80,6 +83,7 @@ If you are not using Power BI Multiple-Language Reports, you are able to enable 
 - Offered Locales. A string list of supported locales. The CKAN Core ones will be used by default.
 
   *Required:* `False`
+
   *Default:* `The CKAN Core available locales`
 
   ```
