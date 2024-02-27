@@ -102,6 +102,7 @@ def get_report_config(data_dict):
         .get('filter_pane', True),  # default show filter pane
     collapse_filters = data_dict.get('resource_view', {})\
         .get('filter_pane_collapse', True),  # default collapse filter pane
+    expand_filters = False if collapse_filters else True
     show_navigate = data_dict.get('resource_view', {})\
         .get('nav_pane', True),  # default show navigation pane
 
@@ -116,13 +117,13 @@ def get_report_config(data_dict):
         "id": report_id,
         "permissions": 0,  # 0 == Read
         "settings": {
-            "localSettings": {
+            "localeSettings": {
                 "language": current_lang,
                 "formatLocale": "CA",
             },
             "panes": {
                 "filters": {
-                    "expanded": (not collapse_filters),
+                    "expanded": expand_filters,
                     "visible": show_filters,
                 },
                 "pageNavigation": {
