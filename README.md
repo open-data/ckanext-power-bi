@@ -97,8 +97,7 @@ This plugin uses `ManagedIdentityCredential (MSI)` on a system level to authenti
 
 See: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/qs-configure-portal-windows-vm
 
-See: https://pypi.org/project/azure-identity/
-Section: Authenticate with a system-assigned managed identity
+See: https://pypi.org/project/azure-identity/ (section: Authenticate with a system-assigned managed identity)
 
 ## License
 
