@@ -1,23 +1,39 @@
 {% import 'macros/form.html' as form %}
 
-{% call form.input(
-  'report_id',
-  id='field-report_id',
-  label=_('Report ID'),
-  value=data.report_id,
-  error=errors.report_id,
-  is_required=true,
-  attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
-  {{ form.info(_('The Power BI Report ID', classes=['info-help-tight'])) }}
-{% endcall %}
+{% if require_locales is none %}
+  {% call form.input(
+    'report_id_' ~ default_locale,
+      id='field-report_id_' ~ default_locale,
+    label=_('Report ID'),
+    value=data['report_id_' ~ default_locale],
+    error=errors['report_id_' ~ default_locale],
+    is_required=true,
+    attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
+    {{ form.info(_('The Power BI Report ID')) }}
+  {% endcall %}
+{% else %}
+  {% for locale in available_locales %}
+    {% set field_is_required = true if locale == default_locale else true if require_locales else false %}
+    {% call form.input(
+      'report_id_' ~ locale,
+      id='field-report_id_' ~ locale,
+      label=_('Report ID') ~ ' (' ~ locale.upper() ~ ')',
+      value=data['report_id_' ~ locale],
+      error=errors['report_id_' ~ locale],
+      is_required=field_is_required,
+      attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
+      {{ form.info(_('The Power BI Report ID') ~ ' (' ~ locale.upper() ~ ')') }}
+    {% endcall %}
+  {% endfor %}
+{% endif %}
 
 {% call form.checkbox(
   'filter_pane',
   id='field-filter_pane',
   label=_('Display Filter Pane'),
-  value='False',
+  value='True',
   error=errors.filter_pane,
-  checked=data.filter_pane,
+  checked=data.get('filter_pane', 'True'),
 ) %}
   {{ form.info(_('Shows the filter pane, allowing users to filter the data in the Power BI report.', classes=['info-help-tight'])) }}
 {% endcall %}
@@ -26,9 +42,9 @@
   'nav_pane',
   id='field-nav_pane',
   label=_('Display Navigation Pane'),
-  value='False',
+  value='True',
   error=errors.nav_pane,
-  checked=data.nav_pane,
+  checked=data.get('nav_pane', 'True'),
 ) %}
   {{ form.info(_('Shows the navigation toolbar, allowing users to navigate through the pages of the Power BI report.', classes=['info-help-tight'])) }}
 {% endcall %}

@@ -1,8 +1,12 @@
-from azure.identity import ManagedIdentityCredential, CredentialUnavailableError
+from azure.identity import (
+    ManagedIdentityCredential, CredentialUnavailableError)
 import requests
+from babel import Locale
 
 from ckan.lib.helpers import ckan_version
-from ckan.plugins.toolkit import h, _, config, ObjectNotFound, NotAuthorized
+from ckan.lib.i18n import get_identifier_from_locale_class
+from ckan.plugins.toolkit import (
+    h, _, config, asbool, ObjectNotFound, NotAuthorized)
 
 
 def _get_access_token():
@@ -84,9 +88,12 @@ def get_report_config(data_dict):
     """
     workspace_id = config.get('ckanext.power_bi.workspace_id')
     if not workspace_id:
-        raise ObjectNotFound(_("A Power BI Workspace ID has not been configured."))
+        raise ObjectNotFound(_("A Power BI Workspace ID "
+                               "has not been configured."))
 
-    report_id = data_dict.get('resource_view', {}).get('report_id')
+    current_lang = h.lang()
+    report_id = data_dict.get('resource_view', {}).get(
+        'report_id_%s' % current_lang)
     if not report_id:
         raise ObjectNotFound(_("Missing Power BI Report ID."))
 
@@ -98,13 +105,14 @@ def get_report_config(data_dict):
         "tokenType": 1,  # 1 == Embed
         "accessToken": embed_token,
         "embedUrl":
-            "https://app.powerbi.com/reportEmbed?reportId=%s&groupId=%s&language=%s" \
-                % (report_id, workspace_id, h.lang()),
+            "https://app.powerbi.com/reportEmbed?"
+            "reportId=%s&groupId=%s&language=%s" \
+                % (report_id, workspace_id, current_lang),
         "id": report_id,
         "permissions": 0,  # 0 == Read
         "settings": {
             "localSettings": {
-                "language": h.lang(),
+                "language": current_lang,
                 "formatLocale": "CA",
             },
             "filterPaneEnabled": data_dict.get('resource_view', {})\
@@ -113,3 +121,32 @@ def get_report_config(data_dict):
                 .get('nav_pane', False),
         },
     }
+
+
+def get_supported_locales():
+    require_locales = config.get('ckanext.power_bi.require_locales', None)
+    if require_locales is not None:
+        require_locales = asbool(require_locales)
+
+    default_locale = config.get('ckan.locale_default', 'en')
+
+    available_locales = []
+    core_locales = []
+
+    core_locale_objects = h.get_available_locales()
+    for locale_obj in core_locale_objects:
+        core_locales.append(locale_obj.short_name)
+
+    offered_locales = config.get(
+        'ckanext.power_bi.locales_offered', '').split()
+
+    if offered_locales:
+        for locale in offered_locales:
+            if locale not in core_locales:
+                # we should only support locales that CKAN has
+                continue
+            available_locales.append(locale)
+    else:
+        available_locales = core_locales
+
+    return require_locales, default_locale, available_locales

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-23 18:23+0000\n"
+"POT-Creation-Date: 2024-02-27 18:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -19,69 +19,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: ckanext/power_bi/helpers.py:16
+#: ckanext/power_bi/helpers.py:20
 msgid "An Azure Client ID has not been configured."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:18
+#: ckanext/power_bi/helpers.py:22
 msgid "Unable to generate an access token to Azure."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:47
+#: ckanext/power_bi/helpers.py:51
 msgid "A Power BI Organization has not been configured."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:75
+#: ckanext/power_bi/helpers.py:79
 msgid "Unable to generate an embed token for the Power BI Report."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:87
+#: ckanext/power_bi/helpers.py:91
 msgid "A Power BI Workspace ID has not been configured."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:91
+#: ckanext/power_bi/helpers.py:98
 msgid "Missing Power BI Report ID."
 msgstr ""
 
-#: ckanext/power_bi/plugin.py:59 ckanext/power_bi/plugin.py:62
+#: ckanext/power_bi/plugin.py:85 ckanext/power_bi/plugin.py:88
 msgid "Power BI"
 msgstr ""
 
-#: ckanext/power_bi/validators.py:12
+#: ckanext/power_bi/validators.py:19 ckanext/power_bi/validators.py:24
 msgid "Power BI Report ID required."
 msgstr ""
 
-#: ckanext/power_bi/validators.py:14
+#: ckanext/power_bi/validators.py:31
 msgid "Power BI Report ID must be a string."
 msgstr ""
 
-#: ckanext/power_bi/validators.py:16
+#: ckanext/power_bi/validators.py:34
 msgid "Invalid value for a Power BI Report ID."
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:6
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:7
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:20
 msgid "Report ID"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:11
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:12
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:25
 msgid "The Power BI Report ID"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:17
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:33
 msgid "Display Filter Pane"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:22
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:38
 msgid ""
 "Shows the filter pane, allowing users to filter the data in the Power BI "
 "report."
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:28
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:44
 msgid "Display Navigation Pane"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:33
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:49
 msgid ""
 "Shows the navigation toolbar, allowing users to navigate through the "
 "pages of the Power BI report."
