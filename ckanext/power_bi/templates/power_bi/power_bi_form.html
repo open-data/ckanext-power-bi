@@ -38,6 +38,17 @@
 {% endcall %}
 
 {% call form.checkbox(
+  'filter_pane_collapse',
+  id='field-filter_pane_collapse',
+  label=_('Collapse Filter Pane'),
+  value='True',
+  error=errors.filter_pane_collapse,
+  checked=data.get('filter_pane_collapse', 'True'),
+) %}
+  {{ form.info(_('Sets the initial state of the filter pane (collapsed by default).', classes=['info-help-tight'])) }}
+{% endcall %}
+
+{% call form.checkbox(
   'nav_pane',
   id='field-nav_pane',
   label=_('Display Navigation Pane'),

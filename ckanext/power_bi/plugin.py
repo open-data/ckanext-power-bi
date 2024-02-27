@@ -74,6 +74,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
         schema = {
             'report_id_%s' % default_locale: [report_id_validator],
             'filter_pane': [boolean_validator],
+            'filter_pane_collapse': [boolean_validator],
             'nav_pane': [boolean_validator],
         }
 

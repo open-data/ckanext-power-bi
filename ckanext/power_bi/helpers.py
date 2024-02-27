@@ -98,6 +98,13 @@ def get_report_config(data_dict):
     access_token = _get_access_token()
     embed_token = _get_embed_token(access_token, workspace_id, report_id)
 
+    show_filters = data_dict.get('resource_view', {})\
+        .get('filter_pane', True),  # default show filter pane
+    collapse_filters = data_dict.get('resource_view', {})\
+        .get('filter_pane_collapse', True),  # default collapse filter pane
+    show_navigate = data_dict.get('resource_view', {})\
+        .get('nav_pane', True),  # default show navigation pane
+
     return {
         "type": "report",
         "tokenType": 1,  # 1 == Embed
@@ -113,10 +120,15 @@ def get_report_config(data_dict):
                 "language": current_lang,
                 "formatLocale": "CA",
             },
-            "filterPaneEnabled": data_dict.get('resource_view', {})\
-                .get('filter_pane', True),  # default show filter pane
-            "navContentPaneEnabled": data_dict.get('resource_view', {})\
-                .get('nav_pane', True),  # default show navigation pane
+            "panes": {
+                "filters": {
+                    "expanded": (not collapse_filters),
+                    "visible": show_filters,
+                },
+                "pageNavigation": {
+                    "visible": show_navigate,
+                },
+            },
         },
     }
 
