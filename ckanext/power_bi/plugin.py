@@ -22,7 +22,8 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IValidators
 
     def get_validators(self):
-        return {'power_bi_report_id': validators.power_bi_report_id,}
+        return {'power_bi_report_id': validators.power_bi_report_id,
+                'power_bi_nav_position': validators.power_bi_nav_position,}
 
     # IResourceView
 
@@ -64,6 +65,10 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
                                 'power_bi_report_id')
         boolean_validator = plugins.toolkit.get_validator(
                                 'boolean_validator')
+        int_validator = plugins.toolkit.get_validator(
+                            'int_validator')
+        nav_pos_validator = plugins.toolkit.get_validator(
+                                'power_bi_nav_position')
 
         i18n_enabled = plugins.toolkit.asbool(
             plugins.toolkit.config.get(
@@ -76,6 +81,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'filter_pane': [boolean_validator],
             'filter_pane_collapse': [boolean_validator],
             'nav_pane': [boolean_validator],
+            'nav_pane_position': [int_validator, nav_pos_validator],
         }
 
         if not i18n_enabled:

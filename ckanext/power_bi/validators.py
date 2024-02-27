@@ -1,7 +1,7 @@
 from re import compile
 from six import text_type
 
-from ckan.plugins.toolkit import _
+from ckan.plugins.toolkit import _, Invalid
 from ckanext.power_bi import helpers
 
 REPORT_ID_PATTERN = compile(
@@ -32,3 +32,10 @@ def power_bi_report_id(key, data, errors, context):
         return
     if not REPORT_ID_PATTERN.match(value):
         errors[key].append(_("Invalid value for a Power BI Report ID."))
+
+
+def power_bi_nav_position(value):
+    if value < 0 or value > 1:
+        raise Invalid(_("Power BI Navigation Pane Position "
+                        "must be 0 (bottom) or 1 (left)."))
+    return value

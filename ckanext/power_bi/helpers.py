@@ -105,6 +105,8 @@ def get_report_config(data_dict):
     expand_filters = False if collapse_filters else True
     show_navigate = data_dict.get('resource_view', {})\
         .get('nav_pane', True),  # default show navigation pane
+    navigate_pos = data_dict.get('resource_view', {})\
+        .get('nav_pane_position', 0),  # default bottom position
 
     return {
         "type": "report",
@@ -122,12 +124,30 @@ def get_report_config(data_dict):
                 "formatLocale": "CA",
             },
             "panes": {
+                "bookmarks": {
+                    "visible": True,
+                },
+                "fields": {
+                    "expanded": False,
+                    "visible": True,
+                },
                 "filters": {
                     "expanded": expand_filters,
                     "visible": show_filters,
                 },
                 "pageNavigation": {
+                    "position": navigate_pos,
                     "visible": show_navigate,
+                },
+                "selection": {
+                    "visible": True,
+                },
+                "syncSlicers": {
+                    "visible": True,
+                },
+                "visualizations": {
+                    "expanded": True,
+                    "visible": True,
                 },
             },
         },
