@@ -99,14 +99,14 @@ def get_report_config(data_dict):
     embed_token = _get_embed_token(access_token, workspace_id, report_id)
 
     show_filters = data_dict.get('resource_view', {})\
-        .get('filter_pane', True),  # default show filter pane
+        .get('filter_pane', True)  # default show filter pane
     collapse_filters = data_dict.get('resource_view', {})\
-        .get('filter_pane_collapse', True),  # default collapse filter pane
+        .get('filter_pane_collapse', True)  # default collapse filter pane
     expand_filters = False if collapse_filters else True
     show_navigate = data_dict.get('resource_view', {})\
-        .get('nav_pane', True),  # default show navigation pane
+        .get('nav_pane', True)  # default show navigation pane
     navigate_pos = data_dict.get('resource_view', {})\
-        .get('nav_pane_position', 0),  # default bottom position
+        .get('nav_pane_position', 0)  # default bottom position
 
     return {
         "type": "report",
@@ -114,8 +114,8 @@ def get_report_config(data_dict):
         "accessToken": embed_token,
         "embedUrl":
             "https://app.powerbi.com/reportEmbed?"
-            "reportId=%s&groupId=%s&language=%s" \
-                % (report_id, workspace_id, current_lang),
+            "reportId=%s&groupId=%s" \
+                % (report_id, workspace_id),
         "id": report_id,
         "permissions": 0,  # 0 == Read
         "settings": {
