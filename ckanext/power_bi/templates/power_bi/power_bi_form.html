@@ -1,102 +1,128 @@
 {% import 'macros/form.html' as form %}
 
 {% if not i18n_enabled %}
-  {% call form.input(
-    'report_id_' ~ default_locale,
-    id='field-report_id_' ~ default_locale,
-    label=_('Report ID'),
-    value=data['report_id_' ~ default_locale],
-    error=errors['report_id_' ~ default_locale],
-    is_required=true,
-    attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
-    {{ form.info(_('The Power BI Report ID')) }}
-  {% endcall %}
-{% else %}
-  {% for locale in available_locales %}
+  <fieldset>
+  <legend>{{ _("Power BI Report ID") }}</legend>
     {% call form.input(
-      'report_id_' ~ locale,
-      id='field-report_id_' ~ locale,
-      label=_('Report ID') ~ ' (' ~ locale.upper() ~ ')',
-      value=data['report_id_' ~ locale],
-      error=errors['report_id_' ~ locale],
-      is_required=(locale in required_locales),
+      'report_id_' ~ default_locale,
+      id='field-report_id_' ~ default_locale,
+      label=_('Report ID'),
+      value=data['report_id_' ~ default_locale],
+      error=errors['report_id_' ~ default_locale],
+      is_required=true,
       attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
-      {{ form.info(_('The Power BI Report ID') ~ ' (' ~ locale.upper() ~ ')') }}
+      {{ form.info(_('The Power BI Report ID')) }}
     {% endcall %}
-  {% endfor %}
+  </fieldset>
+{% else %}
+  <fieldset>
+  <legend>{{ _("Power BI Report IDs by Language") }}</legend>
+    {% for locale in available_locales %}
+      {% call form.input(
+        'report_id_' ~ locale,
+        id='field-report_id_' ~ locale,
+        label=_('Report ID') ~ ' (' ~ locale.upper() ~ ')',
+        value=data['report_id_' ~ locale],
+        error=errors['report_id_' ~ locale],
+        is_required=(locale in required_locales),
+        attrs={'class': 'form-control', 'size': '40'}) %} {# power bi report ids are 36 chars long #}
+        {{ form.info(_('The Power BI Report ID') ~ ' (' ~ locale.upper() ~ ')') }}
+      {% endcall %}
+    {% endfor %}
+  </fieldset>
 {% endif %}
 
-{% call form.checkbox(
-  'filter_pane',
-  id='field-filter_pane',
-  label=_('Display Filter Pane'),
-  value='True',
-  error=errors.filter_pane,
-  checked=data.get('filter_pane', 'True'),
-) %}
-  {{ form.info(_('Shows the filter pane, allowing users to filter the data in the Power BI report.', classes=['info-help-tight'])) }}
-{% endcall %}
+<fieldset>
+  <legend>{{ _("Bookmarks Pane Options") }}</legend>
+  {% call form.checkbox(
+    'bookmarks_pane',
+    id='field-bookmarks_pane',
+    label=_('Display Bookmarks Pane'),
+    value='True',
+    error=errors.bookmarks_pane,
+    checked=data.get('bookmarks_pane', false),
+  ) %}
+    {{ form.info(_('Shows the bookmarks pane, allowing users to view and use any existing Report Bookmarks.', classes=['info-help-tight'])) }}
+  {% endcall %}
+</fieldset>
 
-{% call form.checkbox(
-  'filter_pane_collapse',
-  id='field-filter_pane_collapse',
-  label=_('Collapse Filter Pane'),
-  value='True',
-  error=errors.filter_pane_collapse,
-  checked=data.get('filter_pane_collapse', 'True'),
-) %}
-  {{ form.info(_('Sets the initial state of the filter pane (collapsed by default).', classes=['info-help-tight'])) }}
-{% endcall %}
+<fieldset>
+  <legend>{{ _("Filter Pane Options") }}</legend>
+  {% call form.checkbox(
+    'filter_pane',
+    id='field-filter_pane',
+    label=_('Display Filter Pane'),
+    value='True',
+    error=errors.filter_pane,
+    checked=data.get('filter_pane', true),
+  ) %}
+    {{ form.info(_('Shows the filter pane, allowing users to filter the data in the Power BI report.', classes=['info-help-tight'])) }}
+  {% endcall %}
 
-{% call form.checkbox(
-  'nav_pane',
-  id='field-nav_pane',
-  label=_('Display Navigation Pane'),
-  value='True',
-  error=errors.nav_pane,
-  checked=data.get('nav_pane', 'True'),
-) %}
-  {{ form.info(_('Shows the navigation toolbar, allowing users to navigate through the pages of the Power BI report.', classes=['info-help-tight'])) }}
-{% endcall %}
+  {% call form.checkbox(
+    'filter_pane_collapse',
+    id='field-filter_pane_collapse',
+    label=_('Collapse Filter Pane'),
+    value='True',
+    error=errors.filter_pane_collapse,
+    checked=data.get('filter_pane_collapse', true),
+  ) %}
+    {{ form.info(_('Sets the initial state of the filter pane.', classes=['info-help-tight'])) }}
+  {% endcall %}
+</fieldset>
 
-{# set radio button checked attribute #}
-{% set radio_attrs={'class': 'form-control power-bi-radio-button-input'} %}
+<fieldset>
+  <legend>{{ _("Navigation Pane Options") }}</legend>
+  {% call form.checkbox(
+    'nav_pane',
+    id='field-nav_pane',
+    label=_('Display Navigation Pane'),
+    value='True',
+    error=errors.nav_pane,
+    checked=data.get('nav_pane', true),
+  ) %}
+    {{ form.info(_('Shows the navigation toolbar, allowing users to navigate through the pages of the Power BI report.', classes=['info-help-tight'])) }}
+  {% endcall %}
 
-{% if data.nav_pane_position == 0 or not data.nav_pane_position %}
-  {% set _r = radio_attrs.update({'checked': 'True'}) %}
-{% endif %}
+  {# set radio button checked attribute #}
+  {% set radio_attrs={'class': 'form-control power-bi-radio-button-input'} %}
 
-{% call form.input(
-  'nav_pane_position',
-  id='field-nav_pane_position__bottom',
-  label=_('Navigation Pane Position: Bottom'),
-  type='radio',
-  value='0',
-  error=errors.nav_pane_position,
-  is_required=false,
-  classes=['power-bi-radio-button-wrapper'],
-  attrs=radio_attrs) %}
-  {{ form.info(_('Positions the navigation pane horizontally on the bottom.')) }}
-{% endcall %}
+  {% if data.nav_pane_position == 0 or not data.nav_pane_position %}
+    {% set _r = radio_attrs.update({'checked': true}) %}
+  {% endif %}
 
-{# set radio button checked attribute #}
-{% set radio_attrs={'class': 'form-control power-bi-radio-button-input'} %}
+  {% call form.input(
+    'nav_pane_position',
+    id='field-nav_pane_position__bottom',
+    label=_('Navigation Pane Position: Bottom'),
+    type='radio',
+    value='0',
+    error=errors.nav_pane_position,
+    is_required=false,
+    classes=['power-bi-radio-button-wrapper'],
+    attrs=radio_attrs) %}
+    {{ form.info(_('Positions the navigation pane horizontally on the bottom.')) }}
+  {% endcall %}
 
-{% if data.nav_pane_position == 1 %}
-  {% set _r = radio_attrs.update({'checked': 'True'}) %}
-{% endif %}
+  {# set radio button checked attribute #}
+  {% set radio_attrs={'class': 'form-control power-bi-radio-button-input'} %}
 
-{% call form.input(
-  'nav_pane_position',
-  id='field-nav_pane_position__left',
-  label=_('Navigation Pane Position: Left'),
-  type='radio',
-  value='1',
-  error=errors.nav_pane_position,
-  is_required=false,
-  classes=['power-bi-radio-button-wrapper'],
-  attrs=radio_attrs) %}
-  {{ form.info(_('Positions the navigation pane vetically on the left.')) }}
-{% endcall %}
+  {% if data.nav_pane_position == 1 %}
+    {% set _r = radio_attrs.update({'checked': true}) %}
+  {% endif %}
+
+  {% call form.input(
+    'nav_pane_position',
+    id='field-nav_pane_position__left',
+    label=_('Navigation Pane Position: Left'),
+    type='radio',
+    value='1',
+    error=errors.nav_pane_position,
+    is_required=false,
+    classes=['power-bi-radio-button-wrapper'],
+    attrs=radio_attrs) %}
+    {{ form.info(_('Positions the navigation pane vetically on the left.')) }}
+  {% endcall %}
+</fieldset>
 
 {% asset 'ckanext-power-bi/form-css' %}

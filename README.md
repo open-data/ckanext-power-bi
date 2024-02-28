@@ -2,7 +2,7 @@
 
 # ckanext-power-bi
 
-CKAN Extentsion for Power BI itegration
+CKAN Extentsion for Power BI itegration. This plugin provides a new Resource View called `Power BI`. This plugin is meant for viewing Power BI Reports only. As such, all embed tokens are only generated with `View` permissions. This also means that the panes inside of the embedded reports will be limited to the View Only panes (exception for the Bookmarks pane, for any existing Report Bookmarks).
 
 
 ## Requirements

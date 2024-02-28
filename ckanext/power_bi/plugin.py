@@ -1,7 +1,7 @@
 import ckan.plugins as plugins
 from ckan.lib.plugins import DefaultTranslation
 
-from ckanext.power_bi import validators, helpers
+from ckanext.power_bi import validators, helpers, schema
 
 
 class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -60,49 +60,6 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def form_template(self, context, data_dict):
         return 'power_bi/power_bi_form.html'
 
-    def _get_view_schema(self):
-        report_id_validator = plugins.toolkit.get_validator(
-                                'power_bi_report_id')
-        boolean_validator = plugins.toolkit.get_validator(
-                                'boolean_validator')
-        int_validator = plugins.toolkit.get_validator(
-                            'int_validator')
-        nav_pos_validator = plugins.toolkit.get_validator(
-                                'power_bi_nav_position')
-        default_validator = plugins.toolkit.get_validator(
-                                'default')
-
-        i18n_enabled = plugins.toolkit.asbool(
-            plugins.toolkit.config.get(
-                'ckanext.power_bi.internal_i18n', False))
-        required_locales, default_locale, available_locales = \
-            helpers.get_supported_locales()
-
-        schema = {
-            'report_id_%s' % default_locale: [report_id_validator],
-            'filter_pane': [default_validator(True),
-                            boolean_validator],
-            'filter_pane_collapse': [default_validator(True),
-                                     boolean_validator],
-            'nav_pane': [default_validator(True),
-                         boolean_validator],
-            'nav_pane_position': [default_validator(0),
-                                  int_validator,
-                                  nav_pos_validator],
-        }
-
-        if not i18n_enabled:
-            # using Power BI Multiple-Language Reports
-            # do not need the multiple language fields.
-            return schema
-
-        for locale in available_locales:
-            if locale == default_locale:
-                continue
-            schema['report_id_%s' % locale] = [report_id_validator]
-
-        return schema
-
     def info(self):
 
         return {
@@ -112,7 +69,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'icon': 'windows',
             'default_title': plugins.toolkit._('Power BI'),
             'preview_enabled': False,
-            'schema': self._get_view_schema(),
+            'schema': schema.get_view_schema(),
         }
 
     # DefaultTranslation, ITranslation

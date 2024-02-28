@@ -24,3 +24,11 @@ body div.form-group.power-bi-radio-button-wrapper div.info-block{
   left: 0;
   bottom: -15px;
 }
+
+body fieldset div.form-group{
+  clear: both;
+}
+
+body div[data-module="resource-view-filters-form"]{
+  display: none !important;
+}

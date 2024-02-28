@@ -89,24 +89,31 @@ def get_report_config(data_dict):
         raise ObjectNotFound(_("A Power BI Workspace ID "
                                "has not been configured."))
 
+    resource_view = data_dict.get('resource_view', {})
+
     current_lang = h.lang()
-    report_id = data_dict.get('resource_view', {}).get(
-        'report_id_%s' % current_lang)
+    report_id = resource_view.get('report_id_%s' % current_lang)
     if not report_id:
         raise ObjectNotFound(_("Missing Power BI Report ID."))
 
     access_token = _get_access_token()
     embed_token = _get_embed_token(access_token, workspace_id, report_id)
 
-    show_filters = data_dict.get('resource_view', {})\
-        .get('filter_pane', True)  # default show filter pane
-    collapse_filters = data_dict.get('resource_view', {})\
-        .get('filter_pane_collapse', True)  # default collapse filter pane
+    # default: hide bookmarks pane
+    show_bookmarks = resource_view.get('bookmarks_pane', False)
+
+    # default: show filter pane
+    show_filters = resource_view.get('filter_pane', True)
+
+    # default: collapse filter pane
+    collapse_filters = resource_view.get('filter_pane_collapse', True)
     expand_filters = False if collapse_filters else True
-    show_navigate = data_dict.get('resource_view', {})\
-        .get('nav_pane', True)  # default show navigation pane
-    navigate_pos = data_dict.get('resource_view', {})\
-        .get('nav_pane_position', 0)  # default bottom position
+
+    # default: show nav pane
+    show_navigate = resource_view.get('nav_pane', True)
+
+    # default: nav pane bottom position
+    navigate_pos = resource_view.get('nav_pane_position', 0)
 
     return {
         "type": "report",
@@ -125,11 +132,11 @@ def get_report_config(data_dict):
             },
             "panes": {
                 "bookmarks": {
-                    "visible": True,
+                    "visible": show_bookmarks,
                 },
-                "fields": {
+                "fields": { # requires edit perms
                     "expanded": False,
-                    "visible": True,
+                    "visible": False,
                 },
                 "filters": {
                     "expanded": expand_filters,
@@ -139,15 +146,15 @@ def get_report_config(data_dict):
                     "position": navigate_pos,
                     "visible": show_navigate,
                 },
-                "selection": {
-                    "visible": True,
+                "selection": {  # requires edit perms
+                    "visible": False,
                 },
-                "syncSlicers": {
-                    "visible": True,
+                "syncSlicers": {  # requires edit perms
+                    "visible": False,
                 },
-                "visualizations": {
-                    "expanded": True,
-                    "visible": True,
+                "visualizations": {  # requires edit perms
+                    "expanded": False,
+                    "visible": False,
                 },
             },
         },

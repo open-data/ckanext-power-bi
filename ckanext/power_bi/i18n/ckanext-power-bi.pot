@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-power-bi 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-27 20:49+0000\n"
+"POT-Creation-Date: 2024-02-28 16:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,11 +38,11 @@ msgstr ""
 msgid "A Power BI Workspace ID has not been configured."
 msgstr ""
 
-#: ckanext/power_bi/helpers.py:96
+#: ckanext/power_bi/helpers.py:97
 msgid "Missing Power BI Report ID."
 msgstr ""
 
-#: ckanext/power_bi/plugin.py:97 ckanext/power_bi/plugin.py:100
+#: ckanext/power_bi/plugin.py:67 ckanext/power_bi/plugin.py:70
 msgid "Power BI"
 msgstr ""
 
@@ -58,42 +58,92 @@ msgstr ""
 msgid "Invalid value for a Power BI Report ID."
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:7
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:19
+#: ckanext/power_bi/validators.py:39
+msgid "Power BI Navigation Pane Position must be 0 (bottom) or 1 (left)."
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:5
+msgid "Power BI Report ID"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:9
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:24
 msgid "Report ID"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:12
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:24
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:14
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:29
 msgid "The Power BI Report ID"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:32
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:19
+msgid "Power BI Report IDs by Language"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:36
+msgid "Bookmarks Pane Options"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:40
+msgid "Display Bookmarks Pane"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:45
+msgid ""
+"Shows the bookmarks pane, allowing users to view and use any existing Report "
+"Bookmarks."
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:50
+msgid "Filter Pane Options"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:54
 msgid "Display Filter Pane"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:37
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:59
 msgid ""
 "Shows the filter pane, allowing users to filter the data in the Power BI "
 "report."
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:43
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:65
 msgid "Collapse Filter Pane"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:48
-msgid "Sets the initial state of the filter pane (collapsed by default)."
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:70
+msgid "Sets the initial state of the filter pane."
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:54
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:75
+msgid "Navigation Pane Options"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:79
 msgid "Display Navigation Pane"
 msgstr ""
 
-#: ckanext/power_bi/templates/power_bi/power_bi_form.html:59
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:84
 msgid ""
 "Shows the navigation toolbar, allowing users to navigate through the pages of"
 " the Power BI report."
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:97
+msgid "Navigation Pane Position: Bottom"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:104
+msgid "Positions the navigation pane horizontally on the bottom."
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:117
+msgid "Navigation Pane Position: Left"
+msgstr ""
+
+#: ckanext/power_bi/templates/power_bi/power_bi_form.html:124
+msgid "Positions the navigation pane vetically on the left."
 msgstr ""
 
 #: ckanext/power_bi/templates/power_bi/power_bi_view.html:22
