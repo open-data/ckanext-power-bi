@@ -58,27 +58,45 @@
 ) %}
   {{ form.info(_('Shows the navigation toolbar, allowing users to navigate through the pages of the Power BI report.', classes=['info-help-tight'])) }}
 {% endcall %}
-{# TODO: figure out the checked states... #}
+
+{# set radio button checked attribute #}
+{% set radio_attrs={'class': 'form-control power-bi-radio-button-input'} %}
+
+{% if data.nav_pane_position == 0 or not data.nav_pane_position %}
+  {% set _r = radio_attrs.update({'checked': 'True'}) %}
+{% endif %}
+
 {% call form.input(
   'nav_pane_position',
   id='field-nav_pane_position__bottom',
-  label=_('Navigation Pane Position - Bottom'),
+  label=_('Navigation Pane Position: Bottom'),
   type='radio',
   value='0',
   error=errors.nav_pane_position,
   is_required=false,
-  attrs={'class': 'form-control power-bi-radio-button', 'checked': (data.nav_pane_position == 0 or not data.nav_pane_position)}) %}
+  classes=['power-bi-radio-button-wrapper'],
+  attrs=radio_attrs) %}
   {{ form.info(_('Positions the navigation pane horizontally on the bottom.')) }}
 {% endcall %}
+
+{# set radio button checked attribute #}
+{% set radio_attrs={'class': 'form-control power-bi-radio-button-input'} %}
+
+{% if data.nav_pane_position == 1 %}
+  {% set _r = radio_attrs.update({'checked': 'True'}) %}
+{% endif %}
 
 {% call form.input(
   'nav_pane_position',
   id='field-nav_pane_position__left',
-  label=_('Navigation Pane Position - Left'),
+  label=_('Navigation Pane Position: Left'),
   type='radio',
   value='1',
   error=errors.nav_pane_position,
   is_required=false,
-  attrs={'class': 'form-control power-bi-radio-button', 'checked': (data.nav_pane_position == 1)}) %}
+  classes=['power-bi-radio-button-wrapper'],
+  attrs=radio_attrs) %}
   {{ form.info(_('Positions the navigation pane vetically on the left.')) }}
 {% endcall %}
+
+{% asset 'ckanext-power-bi/form-css' %}

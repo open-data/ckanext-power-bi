@@ -1,0 +1,26 @@
+body div.form-group.power-bi-radio-button-wrapper{
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+body div.form-group.power-bi-radio-button-wrapper label.control-label::after{
+  content: none;
+}
+
+body input.power-bi-radio-button-input{
+  margin: 0 10px 3px 0;
+  line-height: 1;
+  min-height: 0;
+}
+
+body div.form-group.power-bi-radio-button-wrapper div.info-block{
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+}

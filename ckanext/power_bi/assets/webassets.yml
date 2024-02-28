@@ -1,3 +1,8 @@
+form-css:
+  output: ckanext-power-bi/%(version)s_power_bi_form.css
+  contents:
+    - power_bi_form.css
+
 main-css:
   output: ckanext-power-bi/%(version)s_power_bi.css
   contents:

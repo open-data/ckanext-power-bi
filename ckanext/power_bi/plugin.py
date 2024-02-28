@@ -69,6 +69,8 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
                             'int_validator')
         nav_pos_validator = plugins.toolkit.get_validator(
                                 'power_bi_nav_position')
+        default_validator = plugins.toolkit.get_validator(
+                                'default')
 
         i18n_enabled = plugins.toolkit.asbool(
             plugins.toolkit.config.get(
@@ -78,10 +80,15 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         schema = {
             'report_id_%s' % default_locale: [report_id_validator],
-            'filter_pane': [boolean_validator],
-            'filter_pane_collapse': [boolean_validator],
-            'nav_pane': [boolean_validator],
-            'nav_pane_position': [int_validator, nav_pos_validator],
+            'filter_pane': [default_validator(True),
+                            boolean_validator],
+            'filter_pane_collapse': [default_validator(True),
+                                     boolean_validator],
+            'nav_pane': [default_validator(True),
+                         boolean_validator],
+            'nav_pane_position': [default_validator(0),
+                                  int_validator,
+                                  nav_pos_validator],
         }
 
         if not i18n_enabled:
