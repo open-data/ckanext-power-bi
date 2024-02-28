@@ -6,7 +6,6 @@ from ckanext.power_bi import helpers
 def get_view_schema():
     boolean_validator = get_validator('boolean_validator')
     int_validator = get_validator('int_validator')
-    default_validator = get_validator('default')
     report_id_validator = get_validator('power_bi_report_id')
     nav_pos_validator = get_validator('power_bi_nav_position')
 
@@ -17,21 +16,11 @@ def get_view_schema():
 
     schema = {
         'report_id_%s' % default_locale: [report_id_validator],
-        # default: hide bookmarks pane
-        'bookmarks_pane': [default_validator(False),
-                           boolean_validator],
-        # default: show filter pane
-        'filter_pane': [default_validator(True),
-                        boolean_validator],
-        # default: collapse filter pane
-        'filter_pane_collapse': [default_validator(True),
-                                 boolean_validator],
-        # default: show nav pane
-        'nav_pane': [default_validator(True),
-                     boolean_validator],
-        # default: nav pane bottom position
-        'nav_pane_position': [default_validator(0),
-                              int_validator,
+        'bookmarks_pane': [boolean_validator],
+        'filter_pane': [boolean_validator],
+        'filter_pane_collapse': [boolean_validator],
+        'nav_pane': [boolean_validator],
+        'nav_pane_position': [int_validator,
                               nav_pos_validator],
     }
 

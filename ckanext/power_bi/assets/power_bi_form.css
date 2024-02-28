@@ -1,4 +1,4 @@
-body div.form-group.power-bi-radio-button-wrapper{
+body .form-group.power-bi-radio-button-wrapper{
   width: 100%;
   display: flex;
   flex-wrap: nowrap;
@@ -9,7 +9,11 @@ body div.form-group.power-bi-radio-button-wrapper{
   margin-bottom: 30px;
 }
 
-body div.form-group.power-bi-radio-button-wrapper label.control-label::after{
+body .form-group.power-bi-radio-button-wrapper.error{
+  margin-bottom: 65px;
+}
+
+body .form-group.power-bi-radio-button-wrapper label.control-label::after{
   content: none;
 }
 
@@ -19,16 +23,22 @@ body input.power-bi-radio-button-input{
   min-height: 0;
 }
 
-body div.form-group.power-bi-radio-button-wrapper div.info-block{
+body .form-group.power-bi-radio-button-wrapper .info-block{
   position: absolute;
   left: 0;
   bottom: -15px;
 }
 
-body fieldset div.form-group{
+body .form-group.power-bi-radio-button-wrapper .error-block{
+  position: absolute;
+  left: 0;
+  bottom: -50px;
+}
+
+body fieldset .form-group{
   clear: both;
 }
 
-body div[data-module="resource-view-filters-form"]{
+body [data-module="resource-view-filters-form"]{
   display: none !important;
 }
