@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-02-28 16:42+0000\n"
+"POT-Creation-Date: 2024-03-01 16:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -144,7 +144,7 @@ msgid "Navigation Pane Position: Left"
 msgstr ""
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:124
-msgid "Positions the navigation pane vetically on the left."
+msgid "Positions the navigation pane vertically on the left."
 msgstr ""
 
 #: ckanext/power_bi/templates/power_bi/power_bi_view.html:22
@@ -161,5 +161,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Sets the initial state of the filter pane (collapsed by default)."
+#~ msgstr ""
+
+#~ msgid "Positions the navigation pane vetically on the left."
 #~ msgstr ""
 
