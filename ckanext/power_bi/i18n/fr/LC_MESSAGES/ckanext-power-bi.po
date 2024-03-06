@@ -21,27 +21,27 @@ msgstr ""
 
 #: ckanext/power_bi/helpers.py:18
 msgid "An Azure Client ID has not been configured."
-msgstr ""
+msgstr "Un identifiant de client Azure n'a pas été configuré."
 
 #: ckanext/power_bi/helpers.py:20
 msgid "Unable to generate an access token to Azure."
-msgstr ""
+msgstr "Impossible de générer un jeton d'accès à Azure."
 
 #: ckanext/power_bi/helpers.py:49
 msgid "A Power BI Organization has not been configured."
-msgstr ""
+msgstr "Une organisation Power BI n'a pas été configurée."
 
 #: ckanext/power_bi/helpers.py:77
 msgid "Unable to generate an embed token for the Power BI Report."
-msgstr ""
+msgstr "Impossible de générer un jeton d'intégration pour le rapport Power BI."
 
 #: ckanext/power_bi/helpers.py:89
 msgid "A Power BI Workspace ID has not been configured."
-msgstr ""
+msgstr "Un ID d'espace de travail Power BI n'a pas été configuré."
 
 #: ckanext/power_bi/helpers.py:97
 msgid "Missing Power BI Report ID."
-msgstr ""
+msgstr "ID de rapport Power BI manquant."
 
 #: ckanext/power_bi/plugin.py:67 ckanext/power_bi/plugin.py:70
 msgid "Power BI"
@@ -49,107 +49,117 @@ msgstr ""
 
 #: ckanext/power_bi/validators.py:25
 msgid "Power BI Report ID required."
-msgstr ""
+msgstr "ID de rapport Power BI requis."
 
 #: ckanext/power_bi/validators.py:31
 msgid "Power BI Report ID must be a string."
-msgstr ""
+msgstr "L'ID du rapport Power BI doit être une chaîne de caractères."
 
 #: ckanext/power_bi/validators.py:34
 msgid "Invalid value for a Power BI Report ID."
-msgstr ""
+msgstr "Valeur non valide pour un ID de rapport Power BI."
 
 #: ckanext/power_bi/validators.py:39
 msgid "Power BI Navigation Pane Position must be 0 (bottom) or 1 (left)."
 msgstr ""
+"La position du volet de navigation de Power BI doit être 0 (en bas) "
+" ou 1 (à gauche)."
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:5
 msgid "Power BI Report ID"
-msgstr ""
+msgstr "ID du rapport Power BI"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:9
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:24
 msgid "Report ID"
-msgstr ""
+msgstr "ID du Rapport"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:14
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:29
 msgid "The Power BI Report ID"
-msgstr ""
+msgstr "L'ID du rapport Power BI"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:19
 msgid "Power BI Report IDs by Language"
-msgstr ""
+msgstr "ID des rapports Power BI par langue"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:36
 msgid "Bookmarks Pane Options"
-msgstr ""
+msgstr "Options du volet des signets"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:40
 msgid "Display Bookmarks Pane"
-msgstr ""
+msgstr "Afficher le volet des signets"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:45
 msgid ""
 "Shows the bookmarks pane, allowing users to view and use any existing "
 "Report Bookmarks."
 msgstr ""
+"Affiche le volet des signets, permettant aux utilisateurs de visualiser "
+"et d'utiliser tous les signets de rapport existants."
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:50
 msgid "Filter Pane Options"
-msgstr ""
+msgstr "Options du volet de filtrage"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:54
 msgid "Display Filter Pane"
-msgstr ""
+msgstr "Affichage du volet des filtres"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:59
 msgid ""
 "Shows the filter pane, allowing users to filter the data in the Power BI "
 "report."
 msgstr ""
+"Affiche le volet de filtrage, permettant aux utilisateurs de filtrer les "
+"données dans le rapport Power BI."
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:65
 msgid "Collapse Filter Pane"
-msgstr ""
+msgstr "Réduire le volet des filtres"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:70
 msgid "Sets the initial state of the filter pane."
-msgstr ""
+msgstr "Définit l'état initial du volet de filtrage."
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:75
 msgid "Navigation Pane Options"
-msgstr ""
+msgstr "Options du volet de navigation"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:79
 msgid "Display Navigation Pane"
-msgstr ""
+msgstr "Affichage du volet de navigation"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:84
 msgid ""
 "Shows the navigation toolbar, allowing users to navigate through the "
 "pages of the Power BI report."
 msgstr ""
+"Affiche la barre d'outils de navigation, permettant aux utilisateurs "
+"de naviguer dans les pages du rapport Power BI."
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:97
 msgid "Navigation Pane Position: Bottom"
-msgstr ""
+msgstr "Volet de navigation Position : Le fond"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:104
 msgid "Positions the navigation pane horizontally on the bottom."
-msgstr ""
+msgstr "Positionne le volet de navigation horizontalement en bas."
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:117
 msgid "Navigation Pane Position: Left"
-msgstr ""
+msgstr "Volet de navigation Position : Gauche"
 
 #: ckanext/power_bi/templates/power_bi/power_bi_form.html:124
 msgid "Positions the navigation pane vertically on the left."
-msgstr ""
+msgstr "Positionne le volet de navigation verticalement sur la gauche."
 
 #: ckanext/power_bi/templates/power_bi/power_bi_view.html:22
 msgid "Something went wrong. We could not retrieve the Power BI report."
 msgstr ""
+"Quelque chose n'a pas fonctionné. Nous n'avons pas pu récupérer "
+"le rapport Power BI."
 
 #~ msgid "Allow Fullscreen Report"
 #~ msgstr ""
