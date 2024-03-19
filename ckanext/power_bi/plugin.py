@@ -18,6 +18,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def update_config(self, config):
         plugins.toolkit.add_template_directory(config, 'templates')
         plugins.toolkit.add_resource('assets', 'ckanext-power-bi')
+        plugins.toolkit.add_public_directory(config, 'assets/images')
 
     # IValidators
 
@@ -66,7 +67,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'name': 'power_bi_view',
             'title': plugins.toolkit._('Power BI'),
             'filterable': False,
-            'icon': 'windows',
+            'icon': 'power-bi',
             'default_title': plugins.toolkit._('Power BI'),
             'preview_enabled': False,
             'schema': schema.get_view_schema(),

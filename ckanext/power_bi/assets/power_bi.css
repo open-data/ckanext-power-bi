@@ -1,0 +1,18 @@
+body ul.nav-tabs a[href*="?view_id="] i.fa-power-bi{
+  position: relative;
+  vertical-align: bottom !important;
+}
+
+body ul.nav-tabs a[href*="?view_id="] i.fa-power-bi:before{
+  position: absolute;
+  font: inherit !important;
+  background-image: url("/power_bi.svg");
+  background-repeat: no-repeat;
+  background-size: 26px 28px;
+  content: "";
+  width: 26px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

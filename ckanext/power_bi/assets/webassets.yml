@@ -3,16 +3,21 @@ form-css:
   contents:
     - power_bi_form.css
 
-main-css:
-  output: ckanext-power-bi/%(version)s_power_bi.css
+view-css:
+  output: ckanext-power-bi/%(version)s_power_bi_view.css
   contents:
     - power_bi_view.css
 
-main-js:
-  output: ckanext-power-bi/%(version)s_power_bi.js
+view-js:
+  output: ckanext-power-bi/%(version)s_power_bi_view.js
   extra:
     preload:
       - base/main  # need ckan JS and jQuery
   contents:
     - vendor/powerbi.js  # dist release microsoft/release-2.22.2 (https://github.com/microsoft/PowerBI-JavaScript)
     - power_bi_view.js
+
+main-css:
+  output: ckanext-power-bi/%(version)s_power_bi.css
+  contents:
+    - power_bi.css
