@@ -2,5 +2,11 @@
 
 {%- block styles %}
   {{ super() }}
+  {# target body, to override :root #}
+  <style>
+    body{
+      --power-bi-icon-uri: url("{{ h.power_bi_icon_uri() }}");
+    }
+  </style>
   {% asset 'ckanext-power-bi/main-css' %}
 {% endblock %}

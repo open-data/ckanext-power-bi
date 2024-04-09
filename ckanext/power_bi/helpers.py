@@ -17,7 +17,7 @@ def _get_access_token():
     except ValueError:
         raise ObjectNotFound(_("An Azure Client ID has not been configured."))
 
-    err_msg = _("Unable to generate an access token to Azure.")
+    err_msg = _("Unable to generate an access token to/power_bi.svg Azure.")
 
     try:
         access_token_obj = credential.get_token(
@@ -191,3 +191,10 @@ def get_supported_locales():
         available_locales = core_locales
 
     return required_locales, default_locale, available_locales
+
+
+def power_bi_icon_uri():
+    if config.get('ckan.root_path'):
+        # if using a root_path, get the url_for_static
+        return h.url_for_static('/power_bi.svg')
+    return '/power_bi.svg'

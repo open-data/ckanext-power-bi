@@ -1,3 +1,7 @@
+:root{
+  --power-bi-icon-uri: url("/power_bi.svg");
+}
+
 body ul.nav li.view-item.view-item-power_bi_view a i.fa-power-bi{
   position: relative;
   vertical-align: bottom !important;
@@ -6,7 +10,7 @@ body ul.nav li.view-item.view-item-power_bi_view a i.fa-power-bi{
 body ul.nav li.view-item.view-item-power_bi_view a i.fa-power-bi:before{
   position: absolute;
   font: inherit !important;
-  background-image: url("/power_bi.svg");
+  background-image: var(--power-bi-icon-uri);
   background-repeat: no-repeat;
   background-size: 26px 28px;
   content: "";
@@ -20,7 +24,7 @@ body ul.nav li.view-item.view-item-power_bi_view a i.fa-power-bi:before{
 body ul.dropdown-menu > li > a > i.fa-power-bi:before{
   display: inline-block;
   font: inherit !important;
-  background-image: url("/power_bi.svg");
+  background-image: var(--power-bi-icon-uri);
   background-repeat: no-repeat;
   background-size: 17px 16px;
   content: "";

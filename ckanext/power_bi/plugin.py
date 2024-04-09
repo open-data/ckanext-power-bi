@@ -12,6 +12,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IValidators, inherit=True)
     plugins.implements(plugins.IResourceView, inherit=True)
     plugins.implements(plugins.ITranslation, inherit=True)
+    plugins.implements(plugins.ITemplateHelpers, inherit=True)
 
     # IConfigurer
 
@@ -77,3 +78,8 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def i18n_domain(self):
         return 'ckanext-power-bi'
+
+    # ITemplateHelpers
+
+    def get_helpers(self):
+        return {'power_bi_icon_uri': helpers.power_bi_icon_uri}
