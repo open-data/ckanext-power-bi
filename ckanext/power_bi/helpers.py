@@ -6,6 +6,12 @@ from ckan.lib.helpers import ckan_version
 from ckan.plugins.toolkit import (
     h, _, config, ObjectNotFound, NotAuthorized)
 
+from logging import getLogger
+import traceback
+
+
+log = getLogger(__name__)
+
 
 def _get_access_token():
     """
@@ -17,7 +23,7 @@ def _get_access_token():
     except ValueError:
         raise ObjectNotFound(_("An Azure Client ID has not been configured."))
 
-    err_msg = _("Unable to generate an access token to/power_bi.svg Azure.")
+    err_msg = _("Unable to generate an access token to Azure.")
 
     try:
         access_token_obj = credential.get_token(
@@ -49,28 +55,35 @@ def _get_embed_token(access_token, group_id, report_id):
         raise ObjectNotFound(_("A Power BI Organization "
                                "has not been configured."))
 
-    response = requests.request(
-        method='POST',
-        url='https://api.powerbi.com/v1.0/%s/groups'
-            '/%s/reports/%s/GenerateToken'\
-            % (org_name, group_id, report_id),
-        json={
-            'accessLevel': 'View',
-            'allowSaveAs': False,
-        },
-        headers={
-            'Authorization': 'Bearer {}'.format(access_token),
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'User-agent': 'CKAN/{}'.format(ckan_version()),
-        },
-        verify=True
-    )
+    try:
+        response = requests.request(
+            method='POST',
+            url='https://api.powerbi.com/v1.0/%s/groups'
+                '/%s/reports/%s/GenerateToken'\
+                % (org_name, group_id, report_id),
+            json={
+                'accessLevel': 'View',
+                'allowSaveAs': False,
+            },
+            headers={
+                'Authorization': 'Bearer {}'.format(access_token),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'User-agent': 'CKAN/{}'.format(ckan_version()),
+            },
+            verify=True
+        )
+    except Exception:
+        log.info('Failed to retrieve Power BI embed token')
+        log.info(traceback.format_exc())
+        pass
 
     try:
         response_data = response.json()
         embed_token = response_data.get('token')
     except Exception:
+        log.info('Failed to parse Power BI embed token')
+        log.info(traceback.format_exc())
         pass
 
     if not embed_token:

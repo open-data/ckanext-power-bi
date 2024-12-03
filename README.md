@@ -15,11 +15,12 @@ Compatibility with core CKAN versions:
 | 2.7             | Not tested    |
 | 2.8             | Not tested    |
 | 2.9             | Yes    |
+| 2.10            | Yes    |
 
 | Python version    | Compatible?   |
 | --------------- | ------------- |
 | 2.9 and earlier | Yes    |
-| 3.0 and later             | Not tested    |
+| 3.0 and later             | Yes    |
 
 ## Installation
 
@@ -31,7 +32,7 @@ To install ckanext-power-bi:
 
 2. Clone the source and install it on the virtualenv
 
-    - `git clone --branch master --single-branch https://github.com/open-data/ckanext-power-bi.git`
+    - `git clone --branch main --single-branch https://github.com/open-data/ckanext-power-bi.git`
     - `cd ckanext-power-bi`
     - `pip install -e .`
     - `pip install -r requirements.txt` (`requirements-py2.txt` for Python 2)
