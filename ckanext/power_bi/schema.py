@@ -1,9 +1,12 @@
+from typing import cast
+from ckan.types import Schema
+
 from ckan.plugins.toolkit import get_validator, asbool, config
 
 from ckanext.power_bi import helpers
 
 
-def get_view_schema():
+def get_view_schema() -> Schema:
     boolean_validator = get_validator('boolean_validator')
     int_validator = get_validator('int_validator')
     report_id_validator = get_validator('power_bi_report_id')
@@ -11,7 +14,7 @@ def get_view_schema():
 
     i18n_enabled = asbool(config.get(
             'ckanext.power_bi.internal_i18n', False))
-    required_locales, default_locale, available_locales = \
+    _required_locales, default_locale, available_locales = \
         helpers.get_supported_locales()
 
     schema = {
@@ -27,11 +30,11 @@ def get_view_schema():
     if not i18n_enabled:
         # using Power BI Multiple-Language Reports
         # do not need the multiple language fields.
-        return schema
+        return cast(Schema, schema)
 
     for locale in available_locales:
         if locale == default_locale:
             continue
         schema['report_id_%s' % locale] = [report_id_validator]
 
-    return schema
+    return cast(Schema, schema)

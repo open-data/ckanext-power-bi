@@ -1,10 +1,20 @@
 from azure.identity import (
-    ManagedIdentityCredential, CredentialUnavailableError)
+    ManagedIdentityCredential,
+    CredentialUnavailableError
+)
 import requests
+
+from typing import List, Tuple, Dict, Any
+from ckan.types import DataDict
 
 from ckan.lib.helpers import ckan_version
 from ckan.plugins.toolkit import (
-    h, _, config, ObjectNotFound, NotAuthorized)
+    h,
+    _,
+    config,
+    ObjectNotFound,
+    NotAuthorized
+)
 
 from logging import getLogger
 import traceback
@@ -13,7 +23,7 @@ import traceback
 log = getLogger(__name__)
 
 
-def _get_access_token():
+def _get_access_token() -> str:
     """
     Uses ManagedIdentityCredential (MSI) on a sytem level
     to generate an access token with the Power BI API scope permissions.
@@ -39,7 +49,9 @@ def _get_access_token():
     return access_token
 
 
-def _get_embed_token(access_token, group_id, report_id):
+def _get_embed_token(access_token: str,
+                     group_id: str,
+                     report_id: str) -> str:
     """
     Uses the passed Azure access token to retrieve an
     embed token for the given Power BI report.
@@ -55,22 +67,21 @@ def _get_embed_token(access_token, group_id, report_id):
         raise ObjectNotFound(_("A Power BI Organization "
                                "has not been configured."))
 
+    response = None
     try:
         response = requests.request(
             method='POST',
             url='https://api.powerbi.com/v1.0/%s/groups'
-                '/%s/reports/%s/GenerateToken'\
+                '/%s/reports/%s/GenerateToken'
                 % (org_name, group_id, report_id),
             json={
                 'accessLevel': 'View',
-                'allowSaveAs': False,
-            },
+                'allowSaveAs': False},
             headers={
                 'Authorization': 'Bearer {}'.format(access_token),
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'User-agent': 'CKAN/{}'.format(ckan_version()),
-            },
+                'User-agent': 'CKAN/{}'.format(ckan_version())},
             verify=True
         )
     except Exception:
@@ -78,13 +89,14 @@ def _get_embed_token(access_token, group_id, report_id):
         log.info(traceback.format_exc())
         pass
 
-    try:
-        response_data = response.json()
-        embed_token = response_data.get('token')
-    except Exception:
-        log.info('Failed to parse Power BI embed token')
-        log.info(traceback.format_exc())
-        pass
+    if response is not None:
+        try:
+            response_data = response.json()
+            embed_token = response_data.get('token')
+        except Exception:
+            log.info('Failed to parse Power BI embed token')
+            log.info(traceback.format_exc())
+            pass
 
     if not embed_token:
         raise NotAuthorized(_("Unable to generate an embed "
@@ -93,7 +105,7 @@ def _get_embed_token(access_token, group_id, report_id):
     return embed_token
 
 
-def get_report_config(data_dict):
+def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
     """
     Authenticates with Power BI and builds config for a report.
     """
@@ -147,7 +159,7 @@ def get_report_config(data_dict):
                 "bookmarks": {
                     "visible": show_bookmarks,
                 },
-                "fields": { # requires edit perms
+                "fields": {  # requires edit perms
                     "expanded": False,
                     "visible": False,
                 },
@@ -167,14 +179,10 @@ def get_report_config(data_dict):
                 },
                 "visualizations": {  # requires edit perms
                     "expanded": False,
-                    "visible": False,
-                },
-            },
-        },
-    }
+                    "visible": False}}}}
 
 
-def get_supported_locales():
+def get_supported_locales() -> Tuple[List[str], str, List[str]]:
     required_locales = config.get(
         'ckanext.power_bi.required_locales', '').split()
 
@@ -206,7 +214,7 @@ def get_supported_locales():
     return required_locales, default_locale, available_locales
 
 
-def power_bi_icon_uri():
+def power_bi_icon_uri() -> str:
     if config.get('ckan.root_path'):
         # if using a root_path, get the url_for_static
         return h.url_for_static('/power_bi.svg')
