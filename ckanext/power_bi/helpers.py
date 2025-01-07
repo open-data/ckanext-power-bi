@@ -146,7 +146,7 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
         "accessToken": embed_token,
         "embedUrl":
             "https://app.powerbi.com/reportEmbed?"
-            "reportId=%s&groupId=%s" \
+            "reportId=%s&groupId=%s"
                 % (report_id, workspace_id),
         "id": report_id,
         "permissions": 0,  # 0 == Read
