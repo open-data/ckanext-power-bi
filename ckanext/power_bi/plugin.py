@@ -1,3 +1,7 @@
+from typing import Dict, Any
+from ckan.types import Validator, DataDict, Context, Callable
+from ckan.common import CKANConfig
+
 import ckan.plugins as plugins
 from ckan.lib.plugins import DefaultTranslation
 
@@ -15,24 +19,23 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.ITemplateHelpers, inherit=True)
 
     # IConfigurer
-
-    def update_config(self, config):
+    def update_config(self, config: 'CKANConfig'):
         plugins.toolkit.add_template_directory(config, 'templates')
         plugins.toolkit.add_resource('assets', 'ckanext-power-bi')
         plugins.toolkit.add_public_directory(config, 'assets/images')
 
     # IValidators
-
-    def get_validators(self):
+    def get_validators(self) -> Dict[str, Validator]:
         return {'power_bi_report_id': validators.power_bi_report_id,
-                'power_bi_nav_position': validators.power_bi_nav_position,}
+                'power_bi_nav_position': validators.power_bi_nav_position}
 
     # IResourceView
-
-    def can_view(self, data_dict):
+    def can_view(self, data_dict: DataDict) -> bool:
         return True
 
-    def setup_template_variables(self, context, data_dict):
+    def setup_template_variables(self,
+                                 context: Context,
+                                 data_dict: DataDict) -> Dict[str, Any]:
         report_config = None
         error = None
 
@@ -54,16 +57,19 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 'required_locales': required_locales,
                 'default_locale': default_locale,
                 'available_locales': available_locales,
-                'i18n_enabled': i18n_enabled,}
+                'i18n_enabled': i18n_enabled}
 
-    def view_template(self, context, data_dict):
+    def view_template(self,
+                      context: Context,
+                      data_dict: DataDict) -> str:
         return 'power_bi/power_bi_view.html'
 
-    def form_template(self, context, data_dict):
+    def form_template(self,
+                      context: Context,
+                      data_dict: DataDict) -> str:
         return 'power_bi/power_bi_form.html'
 
-    def info(self):
-
+    def info(self) -> Dict[str, Any]:
         return {
             'name': 'power_bi_view',
             'title': plugins.toolkit._('Power BI'),
@@ -75,11 +81,9 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
         }
 
     # DefaultTranslation, ITranslation
-
-    def i18n_domain(self):
+    def i18n_domain(self) -> str:
         return 'ckanext-power-bi'
 
     # ITemplateHelpers
-
-    def get_helpers(self):
+    def get_helpers(self) -> Dict[str, Callable[..., Any]]:
         return {'power_bi_icon_uri': helpers.power_bi_icon_uri}

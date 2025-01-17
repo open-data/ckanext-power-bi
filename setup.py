@@ -39,7 +39,8 @@ setup(
         'Development Status :: 4 - Beta',
 
         # Pick your license as you wish (should match "license" above)
-        'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+        'License :: OSI Approved :: GNU Affero General '
+        'Public License v3 or later (AGPLv3+)',
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
@@ -59,7 +60,8 @@ setup(
       # CKAN extensions should not list dependencies here, but in a separate
       # ``requirements.txt`` file.
       #
-      # http://docs.ckan.org/en/latest/extensions/best-practices.html#add-third-party-libraries-to-requirements-txt
+      # http://docs.ckan.org/en/latest/extensions/best-practices.html#
+      # add-third-party-libraries-to-requirements-txt
     ],
 
     # If there are data files included in your packages that need to be
@@ -71,7 +73,8 @@ setup(
 
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages.
-    # see http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files
+    # see http://docs.python.org/3.4/distutils/setupscript.html#
+    # installing-additional-files
     # In this case, 'data_file' will be installed into '<sys.prefix>/my_data'
     data_files=[],
 
@@ -93,7 +96,8 @@ setup(
     message_extractors={
         'ckanext': [
             ('**.py', 'python', None),
-            ('**/public/*.js', 'javascript', None),  # do not crawl **/public/vendor/*.js
+            # do not crawl **/public/vendor/*.js
+            ('**/public/*.js', 'javascript', None),
             ('**/templates/**.html', 'ckan', None),
         ],
     }
