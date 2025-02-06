@@ -4,14 +4,16 @@ body{
 
 body div#power-bi-wrapper{
   padding-top: 50%;
+  overflow: visible !important;
 }
 
 body div#power-bi-container{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: visible !important;
 }
 
 body div.power-bi-error-message{
