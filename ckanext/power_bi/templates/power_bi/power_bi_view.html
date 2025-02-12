@@ -1,5 +1,3 @@
-{% extends "base.html" %}
-
 {% macro power_bi_error_message(message) %}
   <div class="power-bi-error-message">
     <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;{{ message }}</p>
@@ -7,30 +5,22 @@
 {% endmacro %}
 
 {%- block page -%}
-  {% if power_bi_report_config and not power_bi_error %}
-    {# Load CKAN JS module to initialize the embedded Power BI Report via Power BI JS lib #}
-    <div data-module="power-bi-embed" data-module-config='{{ power_bi_report_config | tojson }}'>
-      <div id="power-bi-wrapper">
-        <div id="power-bi-container"></div>
+  <div class="power-bi-view">
+    {% if power_bi_report_config and not power_bi_error %}
+      {# Load CKAN JS module to initialize the embedded Power BI Report via Power BI JS lib #}
+      <div data-module="power-bi-embed" data-module-config='{{ power_bi_report_config | tojson }}'>
+        <div id="power-bi-wrapper">
+          <div id="power-bi-container"></div>
+        </div>
       </div>
-    </div>
-  {% elif power_bi_error %}
-    {# Specific error messages #}
-    {{ power_bi_error_message(power_bi_error) }}
-  {% else %}
-    {# Fallback, generic error message #}
-    {{ power_bi_error_message(_("Something went wrong. We could not retrieve the Power BI report.")) }}
-  {% endif %}
-{%- endblock -%}
-
-{%- block styles -%}
-  {{- super() -}}
+    {% elif power_bi_error %}
+      {# Specific error messages #}
+      {{ power_bi_error_message(power_bi_error) }}
+    {% else %}
+      {# Fallback, generic error message #}
+      {{ power_bi_error_message(_("Something went wrong. We could not retrieve the Power BI report.")) }}
+    {% endif %}
+  </div>
   {% asset 'ckanext-power-bi/view-css' %}
-{%- endblock -%}
-
-{% block custom_styles %}{% endblock %}
-
-{%- block scripts -%}
-  {{- super() -}}
   {% asset 'ckanext-power-bi/view-js' %}
 {%- endblock -%}

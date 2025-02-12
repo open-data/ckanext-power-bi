@@ -78,6 +78,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'default_title': plugins.toolkit._('Power BI'),
             'preview_enabled': False,
             'schema': schema.get_view_schema(),
+            'iframed': False
         }
 
     # DefaultTranslation, ITranslation

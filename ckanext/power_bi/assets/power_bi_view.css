@@ -1,14 +1,14 @@
-body{
+body .power-bi-view{
   background: none !important;
 }
 
-body div#power-bi-wrapper{
+body .power-bi-view div#power-bi-wrapper{
   padding-top: 50%;
   overflow: visible !important;
 }
 
-body div#power-bi-container{
-  position: fixed;
+body .power-bi-view div#power-bi-container{
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -16,7 +16,7 @@ body div#power-bi-container{
   overflow: visible !important;
 }
 
-body div.power-bi-error-message{
+body .power-bi-view div.power-bi-error-message{
   font-size: 16px;
   font-weight: 500;
   border: 1px solid #ffeeba;
@@ -28,6 +28,6 @@ body div.power-bi-error-message{
   margin: 1.5rem;
 }
 
-body div.power-bi-error-message p{
+body .power-bi-view div.power-bi-error-message p{
   margin: 0;
 }

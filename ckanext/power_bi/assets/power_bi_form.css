@@ -18,9 +18,15 @@ body .form-group.power-bi-radio-button-wrapper label.control-label::after{
 }
 
 body input.power-bi-radio-button-input{
-  margin: 0 10px 3px 0;
+  margin: 0 6px 3px 0;
   line-height: 1;
-  min-height: 0;
+  min-height: 14px;
+  max-height: 14px;
+  height: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  width: 14px;
+  appearance: auto !important;
 }
 
 body .form-group.power-bi-radio-button-wrapper .info-block{
