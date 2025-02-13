@@ -5,7 +5,7 @@
 {% endmacro %}
 
 {%- block page -%}
-  <div class="power-bi-view">
+  <div class="power-bi-view" data-fullscreen="{{ fullscreen }}">
     {% if power_bi_report_config and not power_bi_error %}
       {# Load CKAN JS module to initialize the embedded Power BI Report via Power BI JS lib #}
       <div data-module="power-bi-embed" data-module-config='{{ power_bi_report_config | tojson }}'>

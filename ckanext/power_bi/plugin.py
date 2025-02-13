@@ -1,3 +1,5 @@
+from flask import has_request_context
+
 from typing import Dict, Any
 from ckan.types import Validator, DataDict, Context, Callable
 from ckan.common import CKANConfig
@@ -52,12 +54,20 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
             error = e
             pass
 
+        fullscreen = False
+        if (
+          has_request_context() and
+          hasattr(plugins.toolkit.request, 'view_args') and
+          plugins.toolkit.request.view_args.get('view_id')):
+            fullscreen = True
+
         return {'power_bi_report_config': report_config,
                 'power_bi_error': error,
                 'required_locales': required_locales,
                 'default_locale': default_locale,
                 'available_locales': available_locales,
-                'i18n_enabled': i18n_enabled}
+                'i18n_enabled': i18n_enabled,
+                'fullscreen': fullscreen}
 
     def view_template(self,
                       context: Context,

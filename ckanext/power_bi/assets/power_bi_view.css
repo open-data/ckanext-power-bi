@@ -5,6 +5,7 @@ body .power-bi-view{
 body .power-bi-view div#power-bi-wrapper{
   padding-top: 50%;
   overflow: visible !important;
+  position: relative !important;
 }
 
 body .power-bi-view div#power-bi-container{
@@ -14,6 +15,10 @@ body .power-bi-view div#power-bi-container{
   right: 0;
   bottom: 0;
   overflow: visible !important;
+}
+
+body .power-bi-view[data-fullscreen="True"] div#power-bi-container{
+  position: fixed !important;
 }
 
 body .power-bi-view div.power-bi-error-message{
