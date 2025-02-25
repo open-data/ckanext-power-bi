@@ -168,11 +168,6 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
     access_token = _get_access_token()
     embed_token = _get_embed_token(access_token, workspace_id, report_id)
 
-    # default: no bookmark
-    bookmark = resource_view.get('bookmark_%s' % current_lang, {})
-    if bookmark:
-        bookmark = {'name': bookmark}
-
     # default: hide bookmarks pane
     show_bookmarks = resource_view.get('bookmarks_pane', False)
 
@@ -193,7 +188,7 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
                     POWER_BI_LANG_LOCALES else '%s-%s' % (
                         current_lang, POWER_BI_LANG_LOCALES[current_lang])
 
-    return {
+    report_config = {
         "type": "report",
         "tokenType": 1,  # 1 == Embed
         "accessToken": embed_token,
@@ -203,7 +198,6 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
                 % (report_id, workspace_id),
         "id": report_id,
         "permissions": 0,  # 0 == Read
-        "bookmark": bookmark,
         "settings": {
             "localeSettings": {
                 "language": current_lang,
@@ -235,6 +229,12 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
                     "expanded": False,
                     "visible": False}}}}
 
+    # default: no bookmark
+    bookmark = resource_view.get('bookmark_%s' % current_lang, None)
+    if bookmark:
+        report_config['bookmark'] = {'name': bookmark}
+
+    return report_config
 
 def get_supported_locales() -> Tuple[List[str], str, List[str]]:
     required_locales = config.get(
