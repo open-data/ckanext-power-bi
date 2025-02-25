@@ -11,6 +11,8 @@ def get_view_schema() -> Schema:
     int_validator = get_validator('int_validator')
     report_id_validator = get_validator('power_bi_report_id')
     nav_pos_validator = get_validator('power_bi_nav_position')
+    ignore_missing_validator = get_validator('ignore_missing')
+    unicode_safe_validator = get_validator('unicode_safe')
 
     i18n_enabled = asbool(config.get(
             'ckanext.power_bi.internal_i18n', False))
@@ -19,6 +21,8 @@ def get_view_schema() -> Schema:
 
     schema = {
         'report_id_%s' % default_locale: [report_id_validator],
+        'bookmark_%s' % default_locale: [ignore_missing_validator,
+                                         unicode_safe_validator],
         'bookmarks_pane': [boolean_validator],
         'filter_pane': [boolean_validator],
         'filter_pane_collapse': [boolean_validator],
@@ -36,5 +40,7 @@ def get_view_schema() -> Schema:
         if locale == default_locale:
             continue
         schema['report_id_%s' % locale] = [report_id_validator]
+        schema['bookmark_%s' % locale] = [ignore_missing_validator,
+                                          unicode_safe_validator]
 
     return cast(Schema, schema)

@@ -22,6 +22,50 @@ import traceback
 
 log = getLogger(__name__)
 
+POWER_BI_LANG_LOCALES = {
+    'ar': 'SA',
+    'bg': 'BG',
+    'ca': 'ES',
+    'cs': 'CZ',
+    'da': 'DK',
+    'de': 'DE',
+    'el': 'GR',
+    'en': 'US',
+    'es': 'ES',
+    'et': 'EE',
+    'eU': 'ES',
+    'fi': 'FI',
+    'fr': 'FR',
+    'gl': 'ES',
+    'he': 'IL',
+    'hi': 'IN',
+    'hr': 'HR',
+    'hu': 'HU',
+    'id': 'ID',
+    'it': 'IT',
+    'ja': 'JP',
+    'kk': 'KZ',
+    'ko': 'KR',
+    'lt': 'LT',
+    'lv': 'LV',
+    'ms': 'MY',
+    'nb': 'NO',
+    'nl': 'NL',
+    'pl': 'PL',
+    'pt': 'BR',
+    'ro': 'RO',
+    'ru': 'RU',
+    'sk': 'SK',
+    'sl': 'SI',
+    'sr': 'Cyrl-RS',
+    'sv': 'SE',
+    'th': 'TH',
+    'tr': 'TR',
+    'uk': 'UA',
+    'vi': 'VN',
+    'zh': 'CN'
+}
+
 
 def _get_access_token() -> str:
     """
@@ -116,13 +160,18 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
 
     resource_view = data_dict.get('resource_view', {})
 
-    current_lang = h.lang()
+    current_lang = h.lang() or 'en'
     report_id = resource_view.get('report_id_%s' % current_lang)
     if not report_id:
         raise ObjectNotFound(_("Missing Power BI Report ID."))
 
     access_token = _get_access_token()
     embed_token = _get_embed_token(access_token, workspace_id, report_id)
+
+    # default: no bookmark
+    bookmark = resource_view.get('bookmark_%s' % current_lang, {})
+    if bookmark:
+        bookmark = {'name': bookmark}
 
     # default: hide bookmarks pane
     show_bookmarks = resource_view.get('bookmarks_pane', False)
@@ -140,6 +189,10 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
     # default: nav pane bottom position
     navigate_pos = resource_view.get('nav_pane_position', 0)
 
+    locale_format = current_lang if current_lang not in \
+                    POWER_BI_LANG_LOCALES else '%s-%s' % (
+                        current_lang, POWER_BI_LANG_LOCALES[current_lang])
+
     return {
         "type": "report",
         "tokenType": 1,  # 1 == Embed
@@ -150,10 +203,11 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
                 % (report_id, workspace_id),
         "id": report_id,
         "permissions": 0,  # 0 == Read
+        "bookmark": bookmark,
         "settings": {
             "localeSettings": {
                 "language": current_lang,
-                "formatLocale": "CA",
+                "formatLocale": locale_format,
             },
             "panes": {
                 "bookmarks": {

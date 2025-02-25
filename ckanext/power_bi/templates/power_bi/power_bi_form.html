@@ -14,6 +14,19 @@
       {{ form.info(_('The Power BI Report ID')) }}
     {% endcall %}
   </fieldset>
+  <fieldset>
+    <legend>{{ _("Bookmark Name by Language") }}</legend>
+      {% call form.input(
+        'bookmark_' ~ default_locale,
+        id='field-bookmark_' ~ default_locale,
+        label=_('Bookmark Name'),
+        value=data['bookmark_' ~ default_locale],
+        error=errors['bookmark_' ~ default_locale],
+        is_required=false,
+        attrs={'class': 'form-control', 'size': '40'}) %} {# power bi bookmark names are 28 chars long #}
+        {{ form.info(_('The name of the bookmark')) }}
+      {% endcall %}
+    </fieldset>
 {% else %}
   <fieldset>
   <legend>{{ _("Power BI Report IDs by Language") }}</legend>
@@ -30,6 +43,21 @@
       {% endcall %}
     {% endfor %}
   </fieldset>
+  <fieldset>
+    <legend>{{ _("Bookmark Name by Language") }}</legend>
+      {% for locale in available_locales %}
+        {% call form.input(
+          'bookmark_' ~ locale,
+          id='field-bookmark_' ~ locale,
+          label=_('Bookmark Name') ~ ' (' ~ locale.upper() ~ ')',
+          value=data['bookmark_' ~ locale],
+          error=errors['bookmark_' ~ locale],
+          is_required=false,
+          attrs={'class': 'form-control', 'size': '40'}) %} {# power bi bookmark names are 28 chars long #}
+          {{ form.info(_('The name of the bookmark') ~ ' (' ~ locale.upper() ~ ')') }}
+        {% endcall %}
+      {% endfor %}
+    </fieldset>
 {% endif %}
 
 <fieldset>
