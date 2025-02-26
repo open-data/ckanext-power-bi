@@ -29,6 +29,7 @@ class PowerBiViewPlugin(plugins.SingletonPlugin, DefaultTranslation):
     # IValidators
     def get_validators(self) -> Dict[str, Validator]:
         return {'power_bi_report_id': validators.power_bi_report_id,
+                'power_bi_workspace_id': validators.power_bi_workspace_id,
                 'power_bi_nav_position': validators.power_bi_nav_position}
 
     # IResourceView

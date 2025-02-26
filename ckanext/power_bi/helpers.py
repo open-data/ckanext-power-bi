@@ -153,20 +153,25 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
     """
     Authenticates with Power BI and builds config for a report.
     """
-    workspace_id = config.get('ckanext.power_bi.workspace_id')
+    resource_view = data_dict.get('resource_view', {})
+    is_public = resource_view.get('public_report', False)
+
+    workspace_id = resource_view.get('workspace_id', None)
+    if not is_public:
+        workspace_id = config.get('ckanext.power_bi.workspace_id')
     if not workspace_id:
         raise ObjectNotFound(_("A Power BI Workspace ID "
                                "has not been configured."))
-
-    resource_view = data_dict.get('resource_view', {})
 
     current_lang = h.lang() or 'en'
     report_id = resource_view.get('report_id_%s' % current_lang)
     if not report_id:
         raise ObjectNotFound(_("Missing Power BI Report ID."))
 
-    access_token = _get_access_token()
-    embed_token = _get_embed_token(access_token, workspace_id, report_id)
+    embed_token = 'skipCheckPowerBIAccessToken'
+    if not is_public:
+        access_token = _get_access_token()
+        embed_token = _get_embed_token(access_token, workspace_id, report_id)
 
     # default: hide bookmarks pane
     show_bookmarks = resource_view.get('bookmarks_pane', False)
@@ -228,6 +233,11 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
                 "visualizations": {  # requires edit perms
                     "expanded": False,
                     "visible": False}}}}
+
+    # default: no page
+    page = resource_view.get('page_%s' % current_lang, None)
+    if page:
+        report_config['pageName'] = page
 
     # default: no bookmark
     bookmark = resource_view.get('bookmark_%s' % current_lang, None)

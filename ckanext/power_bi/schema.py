@@ -7,9 +7,11 @@ from ckanext.power_bi import helpers
 
 
 def get_view_schema() -> Schema:
+    default_validator = get_validator('default')
     boolean_validator = get_validator('boolean_validator')
     int_validator = get_validator('int_validator')
     report_id_validator = get_validator('power_bi_report_id')
+    workspace_id_validator = get_validator('power_bi_workspace_id')
     nav_pos_validator = get_validator('power_bi_nav_position')
     ignore_missing_validator = get_validator('ignore_missing')
     unicode_safe_validator = get_validator('unicode_safe')
@@ -20,9 +22,13 @@ def get_view_schema() -> Schema:
         helpers.get_supported_locales()
 
     schema = {
+        'public_report': [default_validator(False), boolean_validator],
+        'workspace_id': [workspace_id_validator],
         'report_id_%s' % default_locale: [report_id_validator],
         'bookmark_%s' % default_locale: [ignore_missing_validator,
                                          unicode_safe_validator],
+        'page_%s' % default_locale: [ignore_missing_validator,
+                                     unicode_safe_validator],
         'bookmarks_pane': [boolean_validator],
         'filter_pane': [boolean_validator],
         'filter_pane_collapse': [boolean_validator],
@@ -42,5 +48,7 @@ def get_view_schema() -> Schema:
         schema['report_id_%s' % locale] = [report_id_validator]
         schema['bookmark_%s' % locale] = [ignore_missing_validator,
                                           unicode_safe_validator]
+        schema['page_%s' % locale] = [ignore_missing_validator,
+                                      unicode_safe_validator]
 
     return cast(Schema, schema)

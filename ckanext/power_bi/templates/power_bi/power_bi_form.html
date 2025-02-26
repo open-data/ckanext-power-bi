@@ -15,7 +15,20 @@
     {% endcall %}
   </fieldset>
   <fieldset>
-    <legend>{{ _("Bookmark Name by Language") }}</legend>
+    <legend>{{ _("Page Name") }}</legend>
+      {% call form.input(
+        'page_' ~ default_locale,
+        id='field-page_' ~ default_locale,
+        label=_('Page Name'),
+        value=data['page_' ~ default_locale],
+        error=errors['page_' ~ default_locale],
+        is_required=false,
+        attrs={'class': 'form-control', 'size': '40'}) %} {# power bi page names are 28 chars long #}
+        {{ form.info(_('The name of the default page')) }}
+      {% endcall %}
+    </fieldset>
+  <fieldset>
+    <legend>{{ _("Bookmark Name") }}</legend>
       {% call form.input(
         'bookmark_' ~ default_locale,
         id='field-bookmark_' ~ default_locale,
@@ -24,7 +37,7 @@
         error=errors['bookmark_' ~ default_locale],
         is_required=false,
         attrs={'class': 'form-control', 'size': '40'}) %} {# power bi bookmark names are 28 chars long #}
-        {{ form.info(_('The name of the bookmark')) }}
+        {{ form.info(_('The name of the default bookmark')) }}
       {% endcall %}
     </fieldset>
 {% else %}
@@ -44,6 +57,21 @@
     {% endfor %}
   </fieldset>
   <fieldset>
+    <legend>{{ _("Page Name by Language") }}</legend>
+      {% for locale in available_locales %}
+        {% call form.input(
+          'page_' ~ locale,
+          id='field-page_' ~ locale,
+          label=_('Page Name') ~ ' (' ~ locale.upper() ~ ')',
+          value=data['page_' ~ locale],
+          error=errors['page_' ~ locale],
+          is_required=false,
+          attrs={'class': 'form-control', 'size': '40'}) %} {# power bi page names are 28 chars long #}
+          {{ form.info(_('The name of the default page') ~ ' (' ~ locale.upper() ~ ')') }}
+        {% endcall %}
+      {% endfor %}
+    </fieldset>
+  <fieldset>
     <legend>{{ _("Bookmark Name by Language") }}</legend>
       {% for locale in available_locales %}
         {% call form.input(
@@ -54,7 +82,7 @@
           error=errors['bookmark_' ~ locale],
           is_required=false,
           attrs={'class': 'form-control', 'size': '40'}) %} {# power bi bookmark names are 28 chars long #}
-          {{ form.info(_('The name of the bookmark') ~ ' (' ~ locale.upper() ~ ')') }}
+          {{ form.info(_('The name of the default bookmark') ~ ' (' ~ locale.upper() ~ ')') }}
         {% endcall %}
       {% endfor %}
     </fieldset>
@@ -153,4 +181,31 @@
   {% endcall %}
 </fieldset>
 
+<fieldset>
+  <legend>{{ _("Public Report Options") }}</legend>
+  {% call form.checkbox(
+    'public_report',
+    id='field-public_report',
+    label=_('Is Public'),
+    value='True',
+    error=errors.public_report,
+    checked=data.get('public_report', false),
+  ) %}
+    {{ form.info(_('Whether or not to treat the reports as public. By default, reports are treated as private and use MSI authentication for access and embed tokens. If marked as Public, a Workspace ID is required.', classes=['info-help-tight'])) }}
+  {% endcall %}
+  <div class="public-report-field">
+    {% call form.input(
+      'workspace_id',
+      id='field-workspace_id',
+      label=_('Workspace ID'),
+      value=data['workspace_id'],
+      error=errors['workspace_id'],
+      is_required=true,
+      attrs={'class': 'form-control', 'size': '40'}) %} {# power bi workspace ids are 36 chars long #}
+      {{ form.info(_('The Workspace ID that the report belongs to.')) }}
+    {% endcall %}
+  </div>
+</fieldset>
+
 {% asset 'ckanext-power-bi/form-css' %}
+{% asset 'ckanext-power-bi/form-js' %}

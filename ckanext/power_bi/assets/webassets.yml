@@ -3,6 +3,14 @@ form-css:
   contents:
     - power_bi_form.css
 
+form-js:
+  output: ckanext-power-bi/%(version)s_power_bi_form.js
+  extra:
+    preload:
+      - base/main  # need jQuery
+  contents:
+    - power_bi_form.js
+
 view-css:
   output: ckanext-power-bi/%(version)s_power_bi_view.css
   contents:
