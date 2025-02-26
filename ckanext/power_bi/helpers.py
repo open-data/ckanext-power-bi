@@ -3,6 +3,8 @@ from azure.identity import (
     CredentialUnavailableError
 )
 import requests
+import base64
+import json
 
 from typing import List, Tuple, Dict, Any
 from ckan.types import DataDict
@@ -168,7 +170,7 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
     if not report_id:
         raise ObjectNotFound(_("Missing Power BI Report ID."))
 
-    embed_token = 'skipCheckPowerBIAccessToken'
+    embed_token = 'any'
     if not is_public:
         access_token = _get_access_token()
         embed_token = _get_embed_token(access_token, workspace_id, report_id)
@@ -189,18 +191,37 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
     # default: nav pane bottom position
     navigate_pos = resource_view.get('nav_pane_position', 0)
 
+    # default: no page
+    page = resource_view.get('page_%s' % current_lang, None)
+
+    # default: no bookmark
+    bookmark = resource_view.get('bookmark_%s' % current_lang, None)
+
     locale_format = current_lang if current_lang not in \
                     POWER_BI_LANG_LOCALES else '%s-%s' % (
                         current_lang, POWER_BI_LANG_LOCALES[current_lang])
+
+    embed_uri = 'https://app.powerbi.com/reportEmbed?' \
+                'reportId={report}&groupId={workspace}'.format(
+                    report=report_id, workspace=workspace_id)
+    if is_public:
+        encoded_report = json.dumps(
+            {'k': report_id, 't': workspace_id}).encode('utf-8')
+        encoded_report = base64.b64encode(encoded_report).decode('utf-8')
+        embed_uri = 'https://app.powerbi.com/view?r={report}'.format(
+                        report=encoded_report)
+
+    if page:
+        embed_uri += '&pageName=%s' % page
+
+    if bookmark:
+        embed_uri += '&bookmark=%s' % bookmark
 
     report_config = {
         "type": "report",
         "tokenType": 1,  # 1 == Embed
         "accessToken": embed_token,
-        "embedUrl":
-            "https://app.powerbi.com/reportEmbed?"
-            "reportId=%s&groupId=%s"
-                % (report_id, workspace_id),
+        "embedUrl": embed_uri,
         "id": report_id,
         "permissions": 0,  # 0 == Read
         "settings": {
@@ -234,13 +255,9 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
                     "expanded": False,
                     "visible": False}}}}
 
-    # default: no page
-    page = resource_view.get('page_%s' % current_lang, None)
     if page:
         report_config['pageName'] = page
 
-    # default: no bookmark
-    bookmark = resource_view.get('bookmark_%s' % current_lang, None)
     if bookmark:
         report_config['bookmark'] = {'name': bookmark}
 
