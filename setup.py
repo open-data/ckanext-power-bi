@@ -25,7 +25,7 @@ setup(
 
     # Author details
     author='''Open Government Canada''',
-    author_email='''open-ouvert@tbs-sct.gc.ca''',
+    author_email='''opendevelopment-developpementouvert@tbs-sct.gc.ca''',
 
     # Choose your license
     license='AGPL',
