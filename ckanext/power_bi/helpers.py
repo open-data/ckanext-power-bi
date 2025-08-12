@@ -198,8 +198,8 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
     bookmark = resource_view.get('bookmark_%s' % current_lang, None)
 
     locale_format = current_lang if current_lang not in \
-                    POWER_BI_LANG_LOCALES else '%s-%s' % (
-                        current_lang, POWER_BI_LANG_LOCALES[current_lang])
+        POWER_BI_LANG_LOCALES else '%s-%s' % (
+            current_lang, POWER_BI_LANG_LOCALES[current_lang])
 
     embed_uri = 'https://app.powerbi.com/reportEmbed?' \
                 'reportId={report}&groupId={workspace}'.format(
@@ -262,6 +262,7 @@ def get_report_config(data_dict: DataDict) -> Dict[str, Any]:
         report_config['bookmark'] = {'name': bookmark}
 
     return report_config
+
 
 def get_supported_locales() -> Tuple[List[str], str, List[str]]:
     required_locales = config.get(
