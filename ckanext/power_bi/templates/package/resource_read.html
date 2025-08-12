@@ -3,7 +3,7 @@
 {%- block styles %}
   {{ super() }}
   {# target body, to override :root #}
-  <style>
+  <style nonce="{{- h.get_inline_script_nonce() if 'get_inline_script_nonce' in h else '' -}}">
     body{
       --power-bi-icon-uri: url("{{ h.power_bi_icon_uri() }}");
     }
