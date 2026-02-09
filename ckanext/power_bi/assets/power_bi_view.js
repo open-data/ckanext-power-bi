@@ -8,7 +8,28 @@ this.ckan.module('power-bi-embed', function($){
       let reportContainer = $('#power-bi-container');
 
       if( reportContainer.length > 0 ){
-        powerbi.embed(reportContainer[0], this.options.config);
+        let interval = false;
+        let tries = 0;
+        const maxTries = 25;
+        interval = setInterval(function(){
+          console.log('Attempting to initialize PowerBI report...(' + tries + 1 + '/' + maxTries + ')');
+          let reportObj = powerbi.embed(reportContainer[0], this.options.config);
+          if( typeof reportObj != 'undefined' && typeof reportObj.config != 'undefined' ){
+            console.log('Successfully initialized PowerBI report...');
+            clearInterval(interval);
+            interval = false;
+            return;
+          }
+          if( tries > maxTries ){
+            console.warn('Failed to initialize PowerBI report...');
+            clearInterval(interval);
+            interval = false;
+            return;
+          }
+          tries++;
+        }, 250);
+      }else{
+        console.warn('Unable to locate the element to embed the PowerBI report...');
       }
 
     }
