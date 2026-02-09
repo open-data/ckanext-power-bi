@@ -6,32 +6,33 @@ this.ckan.module('power-bi-embed', function($){
     },
     initialize: function (){
       let reportContainer = $('#power-bi-container');
+      let reportConfig = null;
 
-      if( reportContainer.length > 0 ){
-        let interval = false;
-        let tries = 0;
-        const maxTries = 25;
-        interval = setInterval(function(){
-          console.log('Attempting to initialize PowerBI report...(' + tries + 1 + '/' + maxTries + ')');
-          let reportObj = powerbi.embed(reportContainer[0], this.options.config);
-          if( tries >= maxTries ){
-            console.warn('Failed to initialize PowerBI report...');
-            clearInterval(interval);
-            interval = false;
-            return;
-          }
-          tries++;
-          if( typeof reportObj == 'undefined' || reportObj == null ){
-            return;
-          }
-          console.log('Successfully initialized PowerBI report...');
-          clearInterval(interval);
-          interval = false;
-          return;
-        }, 250);
+      if( typeof this.options == 'undefined' || this.options == null ){
+        console.log('Failed to load PowerBI configuration from module...generating new object...');
+        reportConfig = JSON.parse($('[data-module="power-bi-embed"]').attr('data-module-config'));
       }else{
-        console.warn('Unable to locate the element to embed the PowerBI report...');
+        reportConfig = this.options.config;
       }
+
+      if( typeof reportConfig == 'undefined' || reportConfig == null || reportConfig.length == 0 ){
+        console.warn('Failed to generate PowerBI configuration...');
+        return;
+      }
+
+      if( reportContainer.length == 0 ){
+        console.warn('Unable to locate the element to embed the PowerBI report...');
+        return;
+      }
+
+      console.log('Attempting to initialize PowerBI report...');
+      let reportObj = powerbi.embed(reportContainer[0], reportConfig);
+      if( typeof reportObj == 'undefined' || reportObj == null ){
+        console.warn('Failed to initialize PowerBI report...');
+        return;
+      }
+
+      console.log('Successfully initialized PowerBI report...');
 
     }
   };
