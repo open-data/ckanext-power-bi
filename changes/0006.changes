@@ -1,1 +1,1 @@
-Added a workaround to JavaScript render blocking that could prevent the PowerBI report from initializing its embedding.
+Added a workaround to JavaScript render blocking that could prevent the PowerBI report from initializing properly. Added front-end console verbosity.

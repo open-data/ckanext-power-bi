@@ -14,19 +14,20 @@ this.ckan.module('power-bi-embed', function($){
         interval = setInterval(function(){
           console.log('Attempting to initialize PowerBI report...(' + tries + 1 + '/' + maxTries + ')');
           let reportObj = powerbi.embed(reportContainer[0], this.options.config);
-          if( typeof reportObj != 'undefined' && typeof reportObj.config != 'undefined' ){
-            console.log('Successfully initialized PowerBI report...');
-            clearInterval(interval);
-            interval = false;
-            return;
-          }
-          if( tries > maxTries ){
+          if( tries >= maxTries ){
             console.warn('Failed to initialize PowerBI report...');
             clearInterval(interval);
             interval = false;
             return;
           }
           tries++;
+          if( typeof reportObj == 'undefined' || reportObj == null ){
+            return;
+          }
+          console.log('Successfully initialized PowerBI report...');
+          clearInterval(interval);
+          interval = false;
+          return;
         }, 250);
       }else{
         console.warn('Unable to locate the element to embed the PowerBI report...');
